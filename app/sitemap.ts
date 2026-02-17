@@ -14,7 +14,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
       { url: `${prefix}/peta`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.9 },
       { url: `${prefix}/statistik`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.9 },
       { url: `${prefix}/compare`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.7 },
-      { url: `${prefix}/facility`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.7 }
+      { url: `${prefix}/facility`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.7 },
+      { url: `${prefix}/page-statistics`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.6 }
     );
     for (const s of schools) {
       entries.push({

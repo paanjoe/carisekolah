@@ -32,7 +32,7 @@ export function SchoolMap({ schools, highlightKod, locale }: Props) {
   }
 
   return (
-    <div ref={containerRef} className="w-full h-[500px] rounded-lg border overflow-hidden">
+    <div ref={containerRef} className="w-full h-full min-h-[500px] overflow-hidden">
       <MapComponent schools={schools} highlightKod={highlightKod} locale={locale} />
     </div>
   );

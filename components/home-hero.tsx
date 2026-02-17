@@ -194,10 +194,11 @@ export function HomeHero() {
   return (
     <section className="relative bg-[hsl(var(--hero-accent))] border-b border-border">
       <div className="container mx-auto px-4 py-12 md:py-16">
-        <div className="grid md:grid-cols-[1fr,minmax(280px,360px)] gap-10 items-center">
+        <div className="grid md:grid-cols-[1fr,minmax(400px,680px)] gap-10 items-center">
           <div className="space-y-6">
-            <h1 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl md:text-5xl">
+            <h1 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl md:text-5xl flex items-center gap-2 flex-wrap">
               {t("welcomeTitle")}
+              <span aria-hidden>🇲🇾</span>
             </h1>
             <p className="text-lg text-muted-foreground max-w-xl">
               {t("welcomeSubtitle")}
@@ -289,27 +290,15 @@ export function HomeHero() {
 
 function HeroIllustration() {
   return (
-    <div className="relative w-full max-w-[320px] aspect-square text-primary/20">
-      <svg viewBox="0 0 200 200" fill="none" className="w-full h-full" aria-hidden>
-        <circle cx="100" cy="100" r="85" stroke="currentColor" strokeWidth="2" fill="none" opacity="0.4" />
-        <circle cx="100" cy="100" r="65" stroke="currentColor" strokeWidth="1.5" fill="none" opacity="0.25" />
-        <g transform="translate(60, 55)">
-          <rect x="0" y="0" width="42" height="52" rx="4" stroke="currentColor" strokeWidth="2" fill="none" opacity="0.5" />
-          <line x1="8" y1="12" x2="34" y2="12" stroke="currentColor" strokeWidth="1.5" opacity="0.6" />
-          <line x1="8" y1="22" x2="34" y2="22" stroke="currentColor" strokeWidth="1.5" opacity="0.4" />
-          <line x1="8" y1="32" x2="26" y2="32" stroke="currentColor" strokeWidth="1.5" opacity="0.3" />
-        </g>
-        <g transform="translate(105, 70)">
-          <circle cx="20" cy="20" r="18" stroke="currentColor" strokeWidth="2" fill="none" opacity="0.5" />
-          <line x1="12" y1="20" x2="28" y2="20" stroke="currentColor" strokeWidth="2" opacity="0.6" />
-          <line x1="20" y1="12" x2="20" y2="28" stroke="currentColor" strokeWidth="2" opacity="0.6" />
-          <line x1="15" y1="15" x2="25" y2="25" stroke="currentColor" strokeWidth="1.5" opacity="0.5" />
-        </g>
-        <g transform="translate(70, 115)">
-          <path d="M12 2 L22 12 L12 22 L2 12 Z" stroke="currentColor" strokeWidth="2" fill="none" opacity="0.4" />
-          <circle cx="12" cy="12" r="3" fill="currentColor" opacity="0.5" />
-        </g>
-      </svg>
+    <div
+      className="relative w-full max-w-[680px] aspect-square flex items-center justify-center"
+      aria-hidden
+    >
+      <img
+        src="/school-illustration.png"
+        alt=""
+        className="w-full h-full max-h-[680px] object-contain mix-blend-multiply dark:mix-blend-normal"
+      />
     </div>
   );
 }

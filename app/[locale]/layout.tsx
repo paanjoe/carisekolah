@@ -32,8 +32,9 @@ export default async function LocaleLayout({ children, params }: Props) {
       <header className="sticky top-0 z-50 border-b border-border bg-card/95 backdrop-blur supports-[backdrop-filter]:bg-card/80">
         <div className="container mx-auto px-4">
           <div className="flex h-14 items-center justify-between gap-6">
-            <Link href="/" className="shrink-0">
-              <span className="font-bold text-lg text-foreground">{t("appName")}</span>
+            <Link href="/" className="shrink-0 flex items-center">
+              <span className="font-bold text-lg text-black dark:text-foreground uppercase">{t("appName")}</span>
+              <span className="ml-1.5" aria-hidden>🇲🇾</span>
             </Link>
             <nav className="hidden sm:flex items-center gap-1">
               <Link
@@ -72,12 +73,12 @@ export default async function LocaleLayout({ children, params }: Props) {
               >
                 {t("facilityUpgrades")}
               </Link>
-              <span
-                className="px-3 py-2 rounded-md text-sm font-medium text-muted-foreground/70 cursor-not-allowed"
-                aria-disabled="true"
+              <Link
+                href="/page-statistics"
+                className="px-3 py-2 rounded-md text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted/60 transition-colors"
               >
                 {t("pageStatistics")}
-              </span>
+              </Link>
             </nav>
             <div className="flex items-center gap-2">
               <LocaleDropdown />
@@ -90,7 +91,10 @@ export default async function LocaleLayout({ children, params }: Props) {
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 gap-8 text-sm md:grid-cols-3 md:gap-4">
             <div>
-              <p className="text-2xl font-bold text-primary">{t("appName")}</p>
+              <p className="text-2xl font-bold text-black dark:text-foreground uppercase flex items-center gap-1.5">
+                {t("appName")}
+                <span aria-hidden>🇲🇾</span>
+              </p>
               <p className="mt-1 text-muted-foreground">
                 {tFooter("dataSourcePrefix")}
                 <a

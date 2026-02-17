@@ -25,7 +25,7 @@
     "openSource": "Open Source",
     "githubRepo": "GitHub — carisekolah",
     "legal": "Legal",
-    "cc0License": "CC0 License",
+    "cc0License": "CC0: No Rights Reserved",
     "privacyPolicy": "Privacy Policy",
     "termsOfUse": "Terms of Use"
   },
@@ -73,7 +73,7 @@
     "databaseCountPrefix": "Database contains ",
     "databaseCountSuffix": " schools.",
     "welcomeTitle": "Welcome to carisekolah.my",
-    "welcomeSubtitle": "Find and analyse KPM schools by location and statistics.",
+    "welcomeSubtitle": "Open data, open source—community-driven. Find and compare KPM schools by location and stats.",
     "searchPlaceholder": "Search schools by name, code or address",
     "searchHint": "Press / to search",
     "popularLinks": "Popular links",
@@ -100,12 +100,20 @@
     "metaTitle": "School Map | carisekolah.my",
     "metaDescription": "KPM school location map. Find schools near you.",
     "hint": "Click markers for school info. Use \"Near me\" for schools within radius.",
+    "searchPlaceholder": "Search school by name, code or address",
+    "noResults": "No schools found",
     "loading": "Loading map...",
     "nearMe": "Near me",
     "radiusKm": "Radius (km)",
     "clear": "Clear",
     "geolocationUnsupported": "Geolocation is not supported by your browser.",
-    "geolocationError": "Unable to get your location."
+    "geolocationError": "Unable to get your location.",
+    "popupLogoPlaceholder": "Logo",
+    "popupCode": "Code",
+    "popupEnrolment": "Enrolment",
+    "popupPtr": "PTR",
+    "popupViewDetails": "View school details",
+    "popupCompare": "Compare"
   },
   "compare": {
     "title": "Compare",
@@ -126,6 +134,14 @@
     "disclaimer": "We have no access to the raw data. To provide real analytics, maps, and comparisons on facility needs—and to support accountability and better planning—we need KPM to release this dataset as open data (e.g. CSV/API). This page will go live once that data is available.",
     "kpmLinkLabel": "View current KPM dashboard (Power BI)",
     "kpmLinkUrl": "https://projekdaif.moe.gov.my/"
+  },
+  "pageStats": {
+    "title": "Page Statistics",
+    "metaTitle": "Page Statistics | carisekolah.my",
+    "metaDescription": "Traffic and usage statistics for carisekolah.my (Umami).",
+    "intro": "Traffic and usage for this site are tracked with Umami (self-hosted, privacy-friendly). The dashboard below is embedded from our Umami instance.",
+    "embedNotConfigured": "Page statistics dashboard is not configured yet. Set NEXT_PUBLIC_UMAMI_SHARE_URL to your Umami share URL to embed the dashboard here.",
+    "openInUmami": "Open in Umami"
   },
   "statistics": {
     "title": "School Statistics",

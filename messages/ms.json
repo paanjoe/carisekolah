@@ -25,7 +25,7 @@
     "openSource": "Sumber terbuka",
     "githubRepo": "GitHub — carisekolah",
     "legal": "Perundangan",
-    "cc0License": "Lesen CC0",
+    "cc0License": "CC0: Tiada Hak Terpelihara",
     "privacyPolicy": "Dasar Privasi",
     "termsOfUse": "Syarat Penggunaan"
   },
@@ -73,7 +73,7 @@
     "databaseCountPrefix": "Pangkalan data mengandungi ",
     "databaseCountSuffix": " sekolah.",
     "welcomeTitle": "Selamat datang ke carisekolah.my",
-    "welcomeSubtitle": "Cari dan analisis sekolah KPM mengikut lokasi dan statistik.",
+    "welcomeSubtitle": "Data terbuka, sumber terbuka—didorong komuniti. Cari dan banding sekolah KPM mengikut lokasi dan statistik.",
     "searchPlaceholder": "Cari sekolah mengikut nama, kod atau alamat",
     "searchHint": "Tekan / untuk cari",
     "popularLinks": "Pautan popular",
@@ -100,12 +100,20 @@
     "metaTitle": "Peta Sekolah | carisekolah.my",
     "metaDescription": "Peta lokasi sekolah KPM. Cari sekolah berhampiran anda.",
     "hint": "Klik penanda untuk maklumat sekolah. Gunakan \"Dekat saya\" untuk sekolah dalam radius.",
+    "searchPlaceholder": "Cari sekolah mengikut nama, kod atau alamat",
+    "noResults": "Tiada sekolah dijumpai",
     "loading": "Memuatkan peta...",
     "nearMe": "Dekat saya",
     "radiusKm": "Radius (km)",
     "clear": "Padam",
     "geolocationUnsupported": "Geolokasi tidak disokong oleh pelayar anda.",
-    "geolocationError": "Tidak dapat mendapatkan lokasi anda."
+    "geolocationError": "Tidak dapat mendapatkan lokasi anda.",
+    "popupLogoPlaceholder": "Logo",
+    "popupCode": "Kod",
+    "popupEnrolment": "Enrolmen",
+    "popupPtr": "PTR",
+    "popupViewDetails": "Lihat butiran sekolah",
+    "popupCompare": "Banding"
   },
   "compare": {
     "title": "Banding",
@@ -126,6 +134,14 @@
     "disclaimer": "Kami tidak mempunyai akses kepada data mentah. Untuk menyediakan analitik sebenar, peta dan perbandingan keperluan kemudahan—serta menyokong akauntabiliti dan perancangan yang lebih baik—kami memerlukan KPM membebaskan set data ini sebagai data terbuka (contoh CSV/API). Halaman ini akan berfungsi sebaik data tersebut tersedia.",
     "kpmLinkLabel": "Lihat papan pemuka KPM semasa (Power BI)",
     "kpmLinkUrl": "https://projekdaif.moe.gov.my/"
+  },
+  "pageStats": {
+    "title": "Statistik Halaman",
+    "metaTitle": "Statistik Halaman | carisekolah.my",
+    "metaDescription": "Statistik trafik dan penggunaan untuk carisekolah.my (Umami).",
+    "intro": "Trafik dan penggunaan laman ini dikesan dengan Umami (self-hosted, mesra privasi). Papan pemuka di bawah disemat dari instans Umami kami.",
+    "embedNotConfigured": "Papan pemuka statistik halaman belum dikonfigurasi. Set NEXT_PUBLIC_UMAMI_SHARE_URL kepada URL kongsi Umami anda untuk menyemat papan pemuka di sini.",
+    "openInUmami": "Buka dalam Umami"
   },
   "statistics": {
     "title": "Statistik Sekolah",
