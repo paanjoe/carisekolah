@@ -1,44 +1,44 @@
-# KPM School Finder
+# carisekolah.my — KPM School Finder
 
-Web app untuk mencari dan menganalisis sekolah KPM (Kementerian Pendidikan Malaysia) menggunakan data daripada risalah KPM.
+Web app to search and analyse KPM (Ministry of Education Malaysia) schools using data from the KPM directory.
 
-## Ciri
+## Features
 
-- **Cari sekolah** – Carian mengikut nama, kod, negeri, PPD, jenis, lokasi.
-- **Peta** – Paparan sekolah pada peta; pilihan "Dekat saya" dengan radius (km).
-- **Statistik** – Dashboard agregat dan senarai sekolah "sesak" (nisbah murid-guru tinggi).
-- **Data** – Diselaraskan setiap hari dari Google Sheet ke `data/schools.json` melalui GitHub Actions.
+- **Find schools** — Search by name, code, state, PPD, type, and location.
+- **Map** — View schools on a map; “Near me” option with radius (km).
+- **Statistics** — Aggregate dashboard and list of “packed” schools (high pupil–teacher ratio).
+- **Data** — Synced daily from Google Sheet to `data/schools.json` via GitHub Actions.
 
-## Teknologi
+## Tech stack
 
 - Next.js (App Router), TypeScript, Tailwind CSS, Shadcn-style UI (Radix), React Leaflet, Recharts.
-- Tiada backend: data JSON dalam repo, dikemas kini oleh cron (GitHub Actions).
+- No backend: JSON data in repo, updated by cron (GitHub Actions).
 
-## Persediaan
+## Setup
 
-1. Clone repo dan pasang dependensi:
+1. Clone the repo and install dependencies:
    ```bash
    npm install
    ```
-2. Jalankan pembangunan:
+2. Run the dev server:
    ```bash
    npm run dev
    ```
-3. Buka [http://localhost:3000](http://localhost:3000).
+3. Open [http://localhost:3000](http://localhost:3000).
 
-## Penyegerakan data
+## Data sync
 
-- **Dalam CI:** Workflow `.github/workflows/sync-schools.yml` berjalan setiap hari (2:00 UTC) dan pada `workflow_dispatch`. Ia memuat CSV dari Google Sheet dan menulis `data/schools.json`.
-- **Tempatan:** Pastikan Google Sheet boleh dieksport sebagai CSV (sesiapa dengan pautan boleh lihat). Jalankan:
+- **In CI:** The workflow `.github/workflows/sync-schools.yml` runs daily (02:00 UTC) and on `workflow_dispatch`. It fetches CSV from a Google Sheet and writes `data/schools.json`.
+- **Locally:** Ensure the Google Sheet is exportable as CSV (anyone with the link can view). Run:
   ```bash
   npm run sync-schools
   ```
 
-## Pembinaan
+## Build
 
 ```bash
 npm run build
 npm start
 ```
 
-Untuk export statik (contoh: GitHub Pages), tambah `output: 'export'` dalam `next.config.ts` dan jalankan `npm run build`.
+For static export (e.g. GitHub Pages), add `output: 'export'` in `next.config.ts` and run `npm run build`.
