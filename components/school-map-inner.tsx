@@ -76,7 +76,7 @@ export function SchoolMapInner({ schools, highlightKod, locale }: Props) {
       const marker = L.marker([s.lat, s.lng], { icon })
         .addTo(map)
         .bindPopup(
-          `<div class="p-1 min-w-[140px]"><a href="/${locale}/sekolah/${encodeURIComponent(s.kodSekolah)}" class="font-medium hover:underline">${escapeHtml(s.namaSekolah || s.kodSekolah)}</a><br/><span class="text-gray-500 text-sm">${escapeHtml(s.bandar || "")} ${s.poskod || ""}</span></div>`
+          `<div class="p-1 min-w-[140px]"><a href="/${locale}/${encodeURIComponent(s.kodSekolah)}" class="font-medium hover:underline">${escapeHtml(s.namaSekolah || s.kodSekolah)}</a><br/><span class="text-gray-500 text-sm">${escapeHtml(s.bandar || "")} ${s.poskod || ""}</span></div>`
         );
       markersRef.current.push(marker);
     });

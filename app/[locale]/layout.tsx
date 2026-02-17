@@ -4,7 +4,6 @@ import { hasLocale } from "next-intl";
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
 import { Link } from "@/i18n/navigation";
-import { LogoPlaceholder } from "@/components/logo-placeholder";
 import { LocaleDropdown } from "@/components/locale-dropdown";
 import { CookieConsent } from "@/components/cookie-consent";
 
@@ -33,10 +32,7 @@ export default async function LocaleLayout({ children, params }: Props) {
       <header className="sticky top-0 z-50 border-b border-border bg-card/95 backdrop-blur supports-[backdrop-filter]:bg-card/80">
         <div className="container mx-auto px-4">
           <div className="flex h-14 items-center justify-between gap-6">
-            <Link href="/" className="flex items-center gap-2 shrink-0">
-              <span className="flex h-9 w-9 items-center justify-center text-primary shrink-0">
-                <LogoPlaceholder className="h-9 w-9" />
-              </span>
+            <Link href="/" className="shrink-0">
               <span className="font-bold text-lg text-foreground">{t("appName")}</span>
             </Link>
             <nav className="hidden sm:flex items-center gap-1">
@@ -64,6 +60,18 @@ export default async function LocaleLayout({ children, params }: Props) {
               >
                 {t("schoolStatistics")}
               </Link>
+              <Link
+                href="/compare"
+                className="px-3 py-2 rounded-md text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted/60 transition-colors"
+              >
+                {t("compare")}
+              </Link>
+              <Link
+                href="/facility"
+                className="px-3 py-2 rounded-md text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted/60 transition-colors"
+              >
+                {t("facilityUpgrades")}
+              </Link>
               <span
                 className="px-3 py-2 rounded-md text-sm font-medium text-muted-foreground/70 cursor-not-allowed"
                 aria-disabled="true"
@@ -78,32 +86,51 @@ export default async function LocaleLayout({ children, params }: Props) {
         </div>
       </header>
       <main className="flex-1">{children}</main>
-      <footer className="border-t border-border bg-muted/30 py-6">
-        <div className="container mx-auto px-4 text-center text-sm text-muted-foreground space-y-2">
-          <p>
-            {tFooter("dataSourcePrefix")}
-            <a
-              href="https://emisonline.moe.gov.my/risalahmap/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="underline hover:text-foreground"
-            >
-              {tFooter("dataSourceLink")}
-            </a>
-          </p>
-          <p className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1">
-            <Link href="/legal" className="underline hover:text-foreground">
-              {tFooter("cc0License")}
-            </Link>
-            <span aria-hidden>·</span>
-            <Link href="/privacy" className="underline hover:text-foreground">
-              {tFooter("privacyPolicy")}
-            </Link>
-            <span aria-hidden>·</span>
-            <Link href="/terms" className="underline hover:text-foreground">
-              {tFooter("termsOfUse")}
-            </Link>
-          </p>
+      <footer className="border-t border-border bg-muted/30 py-12">
+        <div className="container mx-auto px-4">
+          <div className="grid grid-cols-1 gap-8 text-sm md:grid-cols-3 md:gap-4">
+            <div>
+              <p className="text-2xl font-bold text-primary">{t("appName")}</p>
+              <p className="mt-1 text-muted-foreground">
+                {tFooter("dataSourcePrefix")}
+                <a
+                  href="https://emisonline.moe.gov.my/risalahmap/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="underline hover:text-foreground"
+                >
+                  {tFooter("dataSourceLink")}
+                </a>
+              </p>
+            </div>
+            <div>
+              <p className="font-bold text-foreground">{tFooter("openSource")}</p>
+              <p className="mt-1 text-muted-foreground">
+                <a
+                  href="https://github.com/paanjoe/carisekolah"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="underline hover:text-foreground"
+                >
+                  {tFooter("githubRepo")}
+                </a>
+              </p>
+            </div>
+            <div>
+              <p className="font-bold text-foreground">{tFooter("legal")}</p>
+              <p className="mt-1 flex flex-wrap gap-x-3 gap-y-1 text-muted-foreground">
+                <Link href="/legal" className="underline hover:text-foreground">
+                  {tFooter("cc0License")}
+                </Link>
+                <Link href="/privacy" className="underline hover:text-foreground">
+                  {tFooter("privacyPolicy")}
+                </Link>
+                <Link href="/terms" className="underline hover:text-foreground">
+                  {tFooter("termsOfUse")}
+                </Link>
+              </p>
+            </div>
+          </div>
         </div>
       </footer>
       <CookieConsent />

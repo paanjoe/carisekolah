@@ -18,6 +18,8 @@ import { HelpCircle } from "lucide-react";
 
 /** Nisbah murid-guru di atas ini dianggap "sesak" */
 const PACKED_RATIO_THRESHOLD = 20;
+/** Sasaran PTR lazim (contoh KPM) */
+const TARGET_PTR = 20;
 
 type Props = { schools: School[] };
 
@@ -28,6 +30,7 @@ export function StatsDashboard({ schools }: Props) {
     byNegeri,
     byJenis,
     packedList,
+    packedCountTotal,
     totalTeachers,
     totalEnrolment,
     nationalPtr,
@@ -37,6 +40,13 @@ export function StatsDashboard({ schools }: Props) {
     teachersByState,
     enrolmentByState,
     avgPtrByState,
+    schoolsWithPtrCount,
+    withinRecommendedCount,
+    pctWithinRecommended,
+    pctPacked,
+    teacherShortfall,
+    worstStatesByPtr,
+    worstTypesByPtr,
   } = useMemo(() => {
     const byNegeri: Record<string, number> = {};
     const byJenis: Record<string, number> = {};
@@ -52,6 +62,10 @@ export function StatsDashboard({ schools }: Props) {
     const stateEnrolment: Record<string, number> = {};
     const stateRatioSum: Record<string, number> = {};
     const stateRatioCount: Record<string, number> = {};
+    const typeRatioSum: Record<string, number> = {};
+    const typeRatioCount: Record<string, number> = {};
+    let packedCountTotal = 0;
+    let withinRecommendedCount = 0;
 
     for (const s of schools) {
       const negeri = (s.negeri || "").trim() || "Lain";
@@ -69,6 +83,10 @@ export function StatsDashboard({ schools }: Props) {
         withRatio.push({ school: s, ratio });
         stateRatioSum[negeri] = (stateRatioSum[negeri] || 0) + ratio;
         stateRatioCount[negeri] = (stateRatioCount[negeri] || 0) + 1;
+        typeRatioSum[jenis] = (typeRatioSum[jenis] || 0) + ratio;
+        typeRatioCount[jenis] = (typeRatioCount[jenis] || 0) + 1;
+        if (ratio >= PACKED_RATIO_THRESHOLD) packedCountTotal += 1;
+        if (ratio <= PACKED_RATIO_THRESHOLD) withinRecommendedCount += 1;
       }
       stateTeachers[negeri] = (stateTeachers[negeri] || 0) + guru;
       stateEnrolment[negeri] = (stateEnrolment[negeri] || 0) + enrolmen;
@@ -79,6 +97,14 @@ export function StatsDashboard({ schools }: Props) {
 
       if ((s.prasekolah || "").toUpperCase() === "ADA") preschoolCount += 1;
     }
+
+    const schoolsWithPtrCount = withRatio.length;
+    const pctWithinRecommended =
+      schoolsWithPtrCount > 0 ? Math.round((withinRecommendedCount / schoolsWithPtrCount) * 100) : 0;
+    const pctPacked = schoolsWithPtrCount > 0 ? Math.round((packedCountTotal / schoolsWithPtrCount) * 100) : 0;
+
+    const idealTeachers = totalEnrolment / TARGET_PTR;
+    const teacherShortfall = Math.max(0, Math.ceil(idealTeachers - totalTeachers));
 
     const packedList = withRatio
       .filter((x) => x.ratio >= PACKED_RATIO_THRESHOLD)
@@ -93,6 +119,13 @@ export function StatsDashboard({ schools }: Props) {
       count: stateRatioCount[name] ? (stateRatioSum[name]! / stateRatioCount[name]!) : 0,
     }));
 
+    const worstStatesByPtr = [...avgPtrByState].sort((a, b) => (b.count as number) - (a.count as number)).slice(0, 5);
+    const avgPtrByType = Object.keys(typeRatioSum).map((name) => ({
+      name,
+      count: typeRatioCount[name] ? (typeRatioSum[name]! / typeRatioCount[name]!) : 0,
+    }));
+    const worstTypesByPtr = [...avgPtrByType].sort((a, b) => (b.count as number) - (a.count as number)).slice(0, 5);
+
     return {
       byNegeri: Object.entries(byNegeri)
         .sort((a, b) => b[1] - a[1])
@@ -101,6 +134,7 @@ export function StatsDashboard({ schools }: Props) {
         .sort((a, b) => b[1] - a[1])
         .map(([name, count]) => ({ name, count })),
       packedList,
+      packedCountTotal,
       totalTeachers,
       totalEnrolment,
       nationalPtr: totalTeachers > 0 ? totalEnrolment / totalTeachers : 0,
@@ -110,6 +144,13 @@ export function StatsDashboard({ schools }: Props) {
       teachersByState,
       enrolmentByState,
       avgPtrByState,
+      schoolsWithPtrCount,
+      withinRecommendedCount,
+      pctWithinRecommended,
+      pctPacked,
+      teacherShortfall,
+      worstStatesByPtr,
+      worstTypesByPtr,
     };
   }, [schools]);
 
@@ -204,6 +245,98 @@ export function StatsDashboard({ schools }: Props) {
         </Card>
       </div>
 
+      {/* Overall school health */}
+      <Card className="border-primary/20 bg-primary/5">
+        <CardHeader>
+          <CardTitle>{t("schoolHealthTitle")}</CardTitle>
+          <p className="text-sm text-muted-foreground">{t("schoolHealthIntro")}</p>
+        </CardHeader>
+        <CardContent>
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
+            <div>
+              <p className="text-sm font-medium text-muted-foreground">{t("schoolsWithPtr")}</p>
+              <p className="text-2xl font-bold">{schoolsWithPtrCount.toLocaleString()}</p>
+            </div>
+            <div>
+              <p className="text-sm font-medium text-muted-foreground">{t("withinRecommended", { threshold: PACKED_RATIO_THRESHOLD })}</p>
+              <p className="text-2xl font-bold text-emerald-600 dark:text-emerald-400">{pctWithinRecommended}%</p>
+              <p className="text-xs text-muted-foreground">{t("ofSchoolsWithData")}</p>
+            </div>
+            <div>
+              <p className="text-sm font-medium text-muted-foreground">{t("packedCount", { threshold: PACKED_RATIO_THRESHOLD })}</p>
+              <p className="text-2xl font-bold text-amber-600 dark:text-amber-400">{pctPacked}%</p>
+              <p className="text-xs text-muted-foreground">{t("ofSchoolsWithData")}</p>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* National KPM-style KPIs */}
+      <Card>
+        <CardHeader>
+          <CardTitle>{t("kpiTitle")}</CardTitle>
+          <p className="text-sm text-muted-foreground">{t("kpiIntro")}</p>
+        </CardHeader>
+        <CardContent className="space-y-6">
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            <div>
+              <p className="text-sm font-medium text-muted-foreground">{t("targetPtr")}</p>
+              <p className="text-xl font-bold">{t("targetPtrValue", { target: TARGET_PTR })}</p>
+            </div>
+            <div>
+              <p className="text-sm font-medium text-muted-foreground">{t("nationalPtr")}</p>
+              <p className="text-xl font-bold">{nationalPtr.toFixed(1)}</p>
+              <p className="text-xs mt-0.5">
+                {nationalPtr <= TARGET_PTR ? (
+                  <span className="text-emerald-600 dark:text-emerald-400">{t("meetsTarget")}</span>
+                ) : (
+                  <span className="text-amber-600 dark:text-amber-400">{t("aboveTarget")}</span>
+                )}
+              </p>
+            </div>
+            <div>
+              <p className="text-sm font-medium text-muted-foreground">{t("teacherShortfall")}</p>
+              <p className="text-xl font-bold">{teacherShortfall.toLocaleString()}</p>
+              <p className="text-xs text-muted-foreground">{t("teacherShortfallDesc", { target: TARGET_PTR })}</p>
+            </div>
+          </div>
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+            <div className="rounded-lg border bg-muted/30 p-3">
+              <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-2">{t("equityWorstStates")}</p>
+              <ul className="text-sm font-medium">
+                {worstStatesByPtr.map(({ name, count }) => (
+                  <li key={name}>{name}: {(count as number).toFixed(1)}</li>
+                ))}
+              </ul>
+            </div>
+            <div className="rounded-lg border bg-muted/30 p-3">
+              <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-2">{t("equityWorstTypes")}</p>
+              <ul className="text-sm font-medium">
+                {worstTypesByPtr.map(({ name, count }) => (
+                  <li key={name}>{name}: {(count as number).toFixed(1)}</li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* Areas for ministry attention */}
+      <Card className="border-amber-500/30 bg-amber-500/5">
+        <CardHeader>
+          <CardTitle>{t("improveTitle")}</CardTitle>
+          <p className="text-sm text-muted-foreground">{t("improveIntro")}</p>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          <ul className="list-disc list-inside space-y-2 text-sm">
+            <li>{t("improvePacked", { count: packedCountTotal.toLocaleString(), threshold: PACKED_RATIO_THRESHOLD })}</li>
+            <li>{t("improveStates")}</li>
+            <li>{t("improveTypes")}</li>
+            <li>{t("improveShortfall")}</li>
+          </ul>
+        </CardContent>
+      </Card>
+
       {/* Row 3: Packed schools + definition */}
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         <Card>
@@ -213,7 +346,7 @@ export function StatsDashboard({ schools }: Props) {
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <p className="text-2xl font-bold">{packedList.length}</p>
+            <p className="text-2xl font-bold">{packedCountTotal.toLocaleString()}</p>
           </CardContent>
         </Card>
         <Card>
@@ -385,7 +518,7 @@ export function StatsDashboard({ schools }: Props) {
                   <tr key={school.kodSekolah} className="border-b border-border/50">
                     <td className="py-2 pr-4">
                       <Link
-                        href={`/sekolah/${encodeURIComponent(school.kodSekolah)}`}
+                        href={`/${encodeURIComponent(school.kodSekolah)}`}
                         className="text-primary hover:underline"
                       >
                         {school.namaSekolah || school.kodSekolah}

@@ -52,3 +52,34 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* Statistics bar fill animation on load – scaleX so it works everywhere */
+@keyframes stat-bar-grow {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+.stat-bar-wrap {
+  transform-origin: left;
+  animation: stat-bar-grow 0.7s ease-out forwards;
+}
+.stat-bar-wrap-delay-1 { animation-delay: 0.1s; }
+.stat-bar-wrap-delay-2 { animation-delay: 0.2s; }
+.stat-bar-wrap-delay-3 { animation-delay: 0.3s; }
+.stat-bar-wrap-delay-4 { animation-delay: 0.4s; }
+
+/* Circular gauge fill animation */
+@keyframes stat-gauge-fill {
+  to {
+    stroke-dasharray: var(--gauge-dash, 0) 100;
+  }
+}
+
+.stat-gauge-animate {
+  stroke-dasharray: 0 100;
+  animation: stat-gauge-fill 1s ease-out 0.3s forwards;
+}

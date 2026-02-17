@@ -88,7 +88,7 @@ export function HomeHero() {
   const goToSchool = (kod: string) => {
     setOpen(false);
     setSuggestions([]);
-    router.push(`/sekolah/${encodeURIComponent(kod)}`);
+    router.push(`/${encodeURIComponent(kod)}`);
   };
 
   const handleSubmit = (e: React.FormEvent) => {

@@ -153,3 +153,87 @@ export function getSchoolsNear(lat: number, lng: number, radiusKm: number): Scho
     .sort((a, b) => a.dist - b.dist)
     .map((x) => x.school);
 }
+
+const PACKED_PTR_THRESHOLD = 20;
+
+export type SchoolComparisonStats = {
+  schoolPtr: number | null;
+  nationalPtr: number | null;
+  statePtr: number | null;
+  typePtr: number | null;
+  isPacked: boolean;
+  enrolmentPercentileInState: number | null;
+  stateEnrolmentCount: number;
+  stateName: string;
+  typeName: string;
+};
+
+export function getSchoolComparisonStats(allSchools: School[], school: School): SchoolComparisonStats {
+  const stateName = (school.negeri || "").trim() || "";
+  const typeName = (school.jenis || "").trim() || "";
+
+  let nationalEnrol = 0;
+  let nationalTeachers = 0;
+  const stateEnrol: Record<string, number> = {};
+  const stateTeachers: Record<string, number> = {};
+  const typeEnrol: Record<string, number> = {};
+  const typeTeachers: Record<string, number> = {};
+  const stateEnrolments: Record<string, number[]> = {};
+
+  for (const s of allSchools) {
+    const e = typeof s.enrolmen === "number" ? s.enrolmen : 0;
+    const g = typeof s.guru === "number" ? s.guru : 0;
+    nationalEnrol += e;
+    nationalTeachers += g;
+
+    const n = (s.negeri || "").trim() || "Lain";
+    stateEnrol[n] = (stateEnrol[n] || 0) + e;
+    stateTeachers[n] = (stateTeachers[n] || 0) + g;
+    if (!stateEnrolments[n]) stateEnrolments[n] = [];
+    if (e >= 0) stateEnrolments[n].push(e);
+
+    const j = (s.jenis || "").trim() || "Lain";
+    typeEnrol[j] = (typeEnrol[j] || 0) + e;
+    typeTeachers[j] = (typeTeachers[j] || 0) + g;
+  }
+
+  const schoolEnrol = typeof school.enrolmen === "number" ? school.enrolmen : 0;
+  const schoolTeachers = typeof school.guru === "number" ? school.guru : 0;
+  const schoolPtr = schoolTeachers > 0 && schoolEnrol >= 0 ? schoolEnrol / schoolTeachers : null;
+
+  const nationalPtr =
+    nationalTeachers > 0 && nationalEnrol >= 0 ? nationalEnrol / nationalTeachers : null;
+  const stateTotalTeachers = stateName ? stateTeachers[stateName] : 0;
+  const stateTotalEnrol = stateName ? stateEnrol[stateName] : 0;
+  const statePtr =
+    stateTotalTeachers > 0 && stateTotalEnrol >= 0 ? stateTotalEnrol / stateTotalTeachers : null;
+
+  const typeTotalTeachers = typeName ? typeTeachers[typeName] : 0;
+  const typeTotalEnrol = typeName ? typeEnrol[typeName] : 0;
+  const typePtr =
+    typeTotalTeachers > 0 && typeTotalEnrol >= 0 ? typeTotalEnrol / typeTotalTeachers : null;
+
+  const stateEnrolList = stateName ? stateEnrolments[stateName] || [] : [];
+  stateEnrolList.sort((a, b) => a - b);
+  const rank = stateEnrolList.findIndex((e) => e >= schoolEnrol);
+  const enrolmentPercentileInState =
+    stateEnrolList.length > 0 && schoolEnrol >= 0
+      ? rank < 0
+        ? 100
+        : Math.round((1 - rank / stateEnrolList.length) * 100)
+      : null;
+
+  return {
+    schoolPtr,
+    nationalPtr,
+    statePtr,
+    typePtr,
+    isPacked: schoolPtr !== null && schoolPtr >= PACKED_PTR_THRESHOLD,
+    enrolmentPercentileInState,
+    stateEnrolmentCount: stateEnrolList.length,
+    stateName,
+    typeName,
+  };
+}
+
+export { PACKED_PTR_THRESHOLD };

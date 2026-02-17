@@ -12,11 +12,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     entries.push(
       { url: prefix, lastModified: new Date(), changeFrequency: "daily", priority: 1 },
       { url: `${prefix}/peta`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.9 },
-      { url: `${prefix}/statistik`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.9 }
+      { url: `${prefix}/statistik`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.9 },
+      { url: `${prefix}/compare`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.7 },
+      { url: `${prefix}/facility`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.7 }
     );
     for (const s of schools) {
       entries.push({
-        url: `${prefix}/sekolah/${encodeURIComponent(s.kodSekolah)}`,
+        url: `${prefix}/${encodeURIComponent(s.kodSekolah)}`,
         lastModified: new Date(),
         changeFrequency: "weekly" as const,
         priority: 0.8,

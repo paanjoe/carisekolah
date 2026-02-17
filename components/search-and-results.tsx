@@ -404,7 +404,7 @@ export function SearchAndResults({
                     </Link>
                   </Button>
                   <Button size="sm" asChild>
-                    <Link href={`/sekolah/${encodeURIComponent(s.kodSekolah)}`} className="inline-flex items-center gap-1.5">
+                    <Link href={`/${encodeURIComponent(s.kodSekolah)}`} className="inline-flex items-center gap-1.5">
                       <FileText className="h-3.5 w-3.5" />
                       {tCommon("viewSchoolDetails")}
                     </Link>
