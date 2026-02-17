@@ -1,0 +1,31 @@
+export interface School {
+  negeri?: string;
+  ppd?: string;
+  parlimen?: string;
+  dun?: string;
+  peringkat?: string;
+  jenis?: string;
+  kodSekolah: string;
+  namaSekolah?: string;
+  alamat?: string;
+  poskod?: string;
+  bandar?: string;
+  telefon?: string;
+  fax?: string;
+  email?: string;
+  lokasi?: string;
+  gred?: string;
+  bantuan?: string;
+  bilSesi?: string;
+  sesi?: string;
+  enrolmenPrasekolah?: number;
+  enrolmen?: number;
+  enrolmenKhas?: number;
+  guru?: number;
+  prasekolah?: string;
+  integrasi?: string | null;
+  lat?: number;
+  lng?: number;
+  skmUnder150?: string | null;
+  [key: string]: string | number | undefined | null;
+}

@@ -1,0 +1,54 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Gold & white theme – gold as primary (darker gold) */
+    --background: 0 0% 100%;
+    --foreground: 30 15% 14%;
+    --card: 0 0% 100%;
+    --card-foreground: 30 15% 14%;
+    --primary: 43 78% 42%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 45 25% 96%;
+    --secondary-foreground: 30 15% 20%;
+    --muted: 45 20% 96%;
+    --muted-foreground: 30 10% 45%;
+    --accent: 45 35% 94%;
+    --accent-foreground: 30 15% 20%;
+    --destructive: 0 84.2% 60.2%;
+    --border: 45 15% 90%;
+    --input: 45 15% 92%;
+    --ring: 43 78% 42%;
+    --radius: 0.5rem;
+    --hero-accent: 45 50% 97%;
+  }
+  .dark {
+    --background: 30 15% 8%;
+    --foreground: 45 20% 95%;
+    --card: 30 15% 10%;
+    --card-foreground: 45 20% 95%;
+    --primary: 43 78% 42%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 30 20% 18%;
+    --secondary-foreground: 45 20% 95%;
+    --muted: 30 18% 18%;
+    --muted-foreground: 45 15% 65%;
+    --accent: 43 40% 25%;
+    --accent-foreground: 45 20% 95%;
+    --destructive: 0 62.8% 30.6%;
+    --border: 30 20% 22%;
+    --input: 30 20% 22%;
+    --ring: 43 78% 42%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
