@@ -29,6 +29,12 @@ export default async function LocaleLayout({ children, params }: Props) {
 
   return (
     <NextIntlClientProvider messages={messages}>
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2 focus:bg-primary focus:text-primary-foreground focus:rounded-md"
+      >
+        {t("skipToMainContent")}
+      </a>
       <header className="sticky top-0 z-50 border-b border-border bg-card/95 backdrop-blur supports-[backdrop-filter]:bg-card/80">
         <div className="container mx-auto px-4">
           <div className="flex h-14 items-center justify-between gap-6">
@@ -79,6 +85,12 @@ export default async function LocaleLayout({ children, params }: Props) {
               >
                 {t("pageStatistics")}
               </Link>
+              <Link
+                href="/data-catalogue"
+                className="px-3 py-2 rounded-md text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted/60 transition-colors"
+              >
+                {t("dataCatalogue")}
+              </Link>
             </nav>
             <div className="flex items-center gap-2">
               <LocaleDropdown />
@@ -86,7 +98,7 @@ export default async function LocaleLayout({ children, params }: Props) {
           </div>
         </div>
       </header>
-      <main className="flex-1">{children}</main>
+      <main id="main-content" className="flex-1">{children}</main>
       <footer className="border-t border-border bg-muted/30 py-12">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 gap-8 text-sm md:grid-cols-3 md:gap-4">
@@ -135,6 +147,17 @@ export default async function LocaleLayout({ children, params }: Props) {
               </p>
             </div>
           </div>
+          <p className="mt-8 pt-6 border-t border-border text-center text-sm text-muted-foreground">
+            {tFooter("broughtToYouByPrefix")}
+            <a
+              href="https://civictech.my"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="underline hover:text-foreground"
+            >
+              {tFooter("broughtToYouByOrg")}
+            </a>
+          </p>
         </div>
       </footer>
       <CookieConsent />
