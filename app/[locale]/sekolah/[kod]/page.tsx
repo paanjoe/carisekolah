@@ -22,7 +22,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const t = await getTranslations({ locale, namespace: "schoolDetail" });
   if (!school) return { title: t("notFound") };
   return {
-    title: `${school.namaSekolah || school.kodSekolah} | carisekolah.my`,
+    title: `${school.namaSekolah || school.kodSekolah} | carisekolahmy`,
     description: `${school.negeri} · ${school.ppd}. ${school.bandar || ""} ${school.poskod || ""}`,
   };
 }

@@ -14,7 +14,7 @@
     --secondary: 45 25% 96%;
     --secondary-foreground: 30 15% 20%;
     --muted: 45 20% 96%;
-    --muted-foreground: 30 10% 45%;
+    --muted-foreground: 30 12% 38%;
     --accent: 45 35% 94%;
     --accent-foreground: 30 15% 20%;
     --destructive: 0 84.2% 60.2%;
@@ -50,6 +50,11 @@
   }
   body {
     @apply bg-background text-foreground;
+  }
+  /* High-contrast focus outline for keyboard users (WCAG 2.4.7) */
+  :focus-visible {
+    outline: 2px solid hsl(var(--foreground));
+    outline-offset: 2px;
   }
 }
 

@@ -2,7 +2,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { hasLocale } from "next-intl";
 import { routing } from "@/i18n/routing";
 
-const FULL_LICENSE_TEXT = `carisekolah.my (KPM School Finder) - CC0 1.0 Universal - No rights reserved.
+const FULL_LICENSE_TEXT = `carisekolahmy (KPM School Finder) - CC0 1.0 Universal - No rights reserved.
 
 ================================================================================
 
