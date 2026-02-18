@@ -32,13 +32,26 @@ export default async function PageStatisticsPage({ params }: Props) {
         <h1 className="text-2xl font-bold">{t("title")}</h1>
         <p className="text-muted-foreground max-w-3xl">{t("intro")}</p>
         {umamiShareUrl ? (
-          <div className="rounded-xl border border-border bg-card overflow-hidden">
-            <iframe
-              title={t("title")}
-              src={umamiShareUrl}
-              className="w-full min-h-[640px] border-0"
-              allow="fullscreen"
-            />
+          <div className="space-y-3">
+            <div className="flex flex-wrap items-center justify-between gap-2">
+              <a
+                href={umamiShareUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sm font-medium text-primary hover:underline"
+              >
+                {t("openInUmami")} →
+              </a>
+            </div>
+            <div className="rounded-xl border border-border bg-card overflow-hidden">
+              <iframe
+                title={t("title")}
+                src={umamiShareUrl}
+                className="w-full min-h-[640px] border-0"
+                allow="fullscreen"
+              />
+            </div>
+            <p className="text-xs text-muted-foreground">{t("embedHint")}</p>
           </div>
         ) : (
           <div className="rounded-xl border border-dashed border-border bg-muted/30 px-6 py-10 text-center">

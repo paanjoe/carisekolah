@@ -146,7 +146,8 @@
     "metaDescription": "Traffic and usage statistics for carisekolahmy (Umami).",
     "intro": "Traffic and usage for this site are tracked with Umami (self-hosted, privacy-friendly). The dashboard below is embedded from our Umami instance.",
     "embedNotConfigured": "Page statistics dashboard is not configured yet. Set NEXT_PUBLIC_UMAMI_SHARE_URL to your Umami share URL to embed the dashboard here.",
-    "openInUmami": "Open in Umami"
+    "openInUmami": "Open dashboard in new tab",
+    "embedHint": "If the dashboard above doesn't load, your Umami instance may be blocking iframe embedding. Set ALLOWED_FRAME_URLS to your site URL (e.g. https://carisekolah.civictech.my) in the Umami project and redeploy."
   },
   "statistics": {
     "title": "School Statistics",

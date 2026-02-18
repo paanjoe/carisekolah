@@ -37,6 +37,12 @@ No extra code is needed for basic page-view tracking once these two env vars are
 
 You’ve already set this in Vercel; the Page Statistics page will embed it so visitors can see the charts. This does **not** control whether tracking runs — tracking is controlled by the script URL and website ID above.
 
+**If the embed shows a broken/blank area:** The Umami app sends a `Content-Security-Policy` header that, by default, only allows embedding on its own domain. To allow embedding on your main site (e.g. carisekolah.civictech.my), set this in the **Umami** project (the Vercel project that hosts umami-carisekolah.vercel.app), not in the carisekolah app:
+
+- **`ALLOWED_FRAME_URLS`** = `https://carisekolah.civictech.my` (space-separated if you have multiple origins)
+
+Redeploy the Umami project after adding it. Until then, use the “Open dashboard in new tab” link on the Page Statistics page to view the dashboard.
+
 ## Checklist
 
 - [ ] **Tracking:** `NEXT_PUBLIC_UMAMI_SCRIPT_URL` and `NEXT_PUBLIC_UMAMI_WEBSITE_ID` set in Vercel → visits are recorded.
