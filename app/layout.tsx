@@ -46,15 +46,18 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ms" suppressHydrationWarning>
+      <head>
+        <script defer src={`${umamiScriptUrl}`} data-website-id={umamiWebsiteId}></script>
+      </head>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen flex flex-col`} suppressHydrationWarning>
-        {children}
         {umamiScriptUrl && umamiWebsiteId && (
           <Script
             src={`${umamiScriptUrl.replace(/\/$/, "")}/script.js`}
             data-website-id={umamiWebsiteId}
-            strategy="afterInteractive"
+            strategy="beforeInteractive"
           />
         )}
+        {children}
       </body>
     </html>
   );
