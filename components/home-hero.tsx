@@ -149,6 +149,7 @@ export function HomeHero() {
       <ul
         id="hero-suggestions"
         role="listbox"
+        aria-busy={loading}
         className={cn(
           "fixed z-[100] rounded-xl border border-border bg-card py-1 shadow-xl",
           "max-h-[280px] overflow-auto"
@@ -160,12 +161,13 @@ export function HomeHero() {
         }}
       >
         {loading && (
-          <li className="px-4 py-3 text-sm text-muted-foreground">...</li>
+          <li className="px-4 py-3 text-sm text-muted-foreground" aria-hidden>...</li>
         )}
         {!loading &&
           suggestions.map((s, i) => (
             <li
               key={s.kodSekolah}
+              id={`hero-suggestion-${i}`}
               role="option"
               aria-selected={i === highlightedIndex}
               className={cn(
@@ -227,6 +229,11 @@ export function HomeHero() {
                       aria-label={t("searchPlaceholder")}
                       aria-expanded={open}
                       aria-controls="hero-suggestions"
+                      aria-activedescendant={
+                        open && !loading && highlightedIndex >= 0 && suggestions[highlightedIndex]
+                          ? `hero-suggestion-${highlightedIndex}`
+                          : undefined
+                      }
                       aria-autocomplete="list"
                       role="combobox"
                     />
@@ -246,8 +253,8 @@ export function HomeHero() {
                       </button>
                     )}
                   </div>
-                  <Button type="submit" size="lg" className="h-12 rounded-xl px-6 shrink-0">
-                    <Search className="h-5 w-5" />
+                  <Button type="submit" size="lg" className="h-12 rounded-xl px-6 shrink-0" aria-label={tCommon("search")}>
+                    <Search className="h-5 w-5" aria-hidden />
                   </Button>
                 </form>
               </div>

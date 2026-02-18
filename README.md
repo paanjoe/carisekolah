@@ -1,4 +1,6 @@
-# carisekolah.my — KPM School Finder
+# carisekolahmy — KPM School Finder
+
+**Official site:** [carisekolah.civictech.my](https://carisekolah.civictech.my)
 
 Web app to search and analyse KPM (Ministry of Education Malaysia) schools using data from the KPM directory.
 
@@ -33,6 +35,18 @@ Web app to search and analyse KPM (Ministry of Education Malaysia) schools using
   ```bash
   npm run sync-schools
   ```
+
+## Testing
+
+- **Unit and component tests (Vitest + React Testing Library)**  
+  `npm run test` — runs tests for `lib/schools.ts`, `lib/school-detail-utils.ts`, and key components.  
+  `npm run test:watch` — watch mode.
+
+- **E2E and accessibility (Playwright + axe)**  
+  Install browsers once: `npx playwright install chromium`  
+  Then: `npm run test:e2e:a11y` (a11y only) or `npm run test:e2e` (full E2E).
+
+See [docs/ACCESSIBILITY.md](docs/ACCESSIBILITY.md) for how to run a11y checks and [docs/SECURITY.md](docs/SECURITY.md) for security practices and reporting.
 
 ## Build
 
