@@ -306,7 +306,11 @@
     "intro": "Muat turun set data sekolah yang digunakan oleh laman ini. Data bersumber dari KPM dan dikemas kini secara berkala.",
     "downloadSchools": "Muat turun schools.json",
     "downloadHint": "Senarai penuh sekolah dalam format JSON. Fail mungkin besar.",
-    "fieldsNote": "Medan termasuk kod sekolah, nama, negeri, PPD, alamat, enrolmen, guru, koordinat, dan lain-lain."
+    "fieldsNote": "Medan termasuk kod sekolah, nama, negeri, PPD, alamat, enrolmen, guru, koordinat, dan lain-lain.",
+    "sampleModelTitle": "Contoh rekod (schools.json)",
+    "sampleModelDescription": "Setiap item dalam tatasusunan ialah objek sekolah. Contoh struktur:",
+    "copyJson": "Salin JSON",
+    "copied": "Disalin!"
   },
   "manifest": {
     "name": "carisekolahmy",

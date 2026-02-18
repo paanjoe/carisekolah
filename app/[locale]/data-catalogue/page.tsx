@@ -3,6 +3,7 @@ import { hasLocale } from "next-intl";
 import { routing } from "@/i18n/routing";
 import { Download } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { CopyableCodeBlock } from "@/components/copyable-code";
 
 type Props = { params: Promise<{ locale: string }> };
 
@@ -49,7 +50,49 @@ export default async function DataCataloguePage({ params }: Props) {
           </div>
           <p className="text-sm text-muted-foreground">{t("fieldsNote")}</p>
         </div>
+
+        <section className="space-y-3">
+          <h2 className="text-lg font-semibold">{t("sampleModelTitle")}</h2>
+          <p className="text-sm text-muted-foreground">{t("sampleModelDescription")}</p>
+          <CopyableCodeBlock
+            content={JSON.stringify(SAMPLE_SCHOOL, null, 2)}
+            copyLabel={t("copyJson")}
+            copiedLabel={t("copied")}
+          />
+        </section>
       </div>
     </div>
   );
 }
+
+/** Example school object matching the schools.json array item structure */
+const SAMPLE_SCHOOL = {
+  negeri: "JOHOR",
+  ppd: "PPD BATU PAHAT",
+  parlimen: "PARIT SULONG",
+  dun: "SEMERAH",
+  peringkat: "Rendah",
+  jenis: "SK",
+  kodSekolah: "JBA0001",
+  namaSekolah: "SEKOLAH KEBANGSAAN LUBOK",
+  alamat: "KG. LUBOK,  SEMERAH",
+  poskod: "83600",
+  bandar: "BATU PAHAT",
+  telefon: "074164398",
+  fax: "074164398",
+  email: "jba0001@moe.edu.my",
+  lokasi: "Luar Bandar",
+  gred: "C",
+  bantuan: "SK",
+  bilSesi: "1 Sesi",
+  sesi: "Pagi Sahaja",
+  enrolmenPrasekolah: 11,
+  enrolmen: 68,
+  enrolmenKhas: 29,
+  guru: 20,
+  prasekolah: "ADA",
+  integrasi: "ADA",
+  lng: 102.7954003,
+  lat: 1.874099179,
+  skmUnder150: "YA",
+} as const;

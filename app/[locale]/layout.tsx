@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
 import { Link } from "@/i18n/navigation";
 import { LocaleDropdown } from "@/components/locale-dropdown";
+import { MobileNav } from "@/components/mobile-nav";
 import { CookieConsent } from "@/components/cookie-consent";
 
 type Props = {
@@ -93,6 +94,20 @@ export default async function LocaleLayout({ children, params }: Props) {
               </Link>
             </nav>
             <div className="flex items-center gap-2">
+              <MobileNav
+                links={[
+                  { href: "/", label: t("home") },
+                  { href: "/directory", label: t("directory") },
+                  { href: "/peta", label: t("map") },
+                  { href: "/statistik", label: t("schoolStatistics") },
+                  { href: "/compare", label: t("compare") },
+                  { href: "/facility", label: t("facilityUpgrades") },
+                  { href: "/page-statistics", label: t("pageStatistics") },
+                  { href: "/data-catalogue", label: t("dataCatalogue") },
+                ]}
+              >
+                <LocaleDropdown />
+              </MobileNav>
               <LocaleDropdown />
             </div>
           </div>
