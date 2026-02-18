@@ -118,7 +118,12 @@
     "popupEnrolment": "Enrolmen",
     "popupPtr": "PTR",
     "popupViewDetails": "Lihat butiran sekolah",
-    "popupCompare": "Banding"
+    "popupCompare": "Banding",
+    "nearbySchoolsTitle": "Sekolah berhampiran (dari lokasi anda)",
+    "fromYourLocation": "dari lokasi anda",
+    "getDirections": "Dapatkan arah",
+    "distanceKm": "{{value}} km",
+    "distanceM": "{{value}} m"
   },
   "compare": {
     "title": "Banding",
@@ -144,7 +149,7 @@
     "title": "Statistik Halaman",
     "metaTitle": "Statistik Halaman | carisekolahmy",
     "metaDescription": "Statistik trafik dan penggunaan untuk carisekolahmy (Umami).",
-    "intro": "Trafik dan penggunaan laman ini dikesan dengan Umami (self-hosted, mesra privasi). Papan pemuka di bawah disemat dari instans Umami kami.",
+    "intro": "Trafik dan penggunaan laman ini dikesan dengan Umami (self-hosted, mesra privasi). Papan pemuka dibuka dalam tab baharu.",
     "embedNotConfigured": "Papan pemuka statistik halaman belum dikonfigurasi. Set NEXT_PUBLIC_UMAMI_SHARE_URL kepada URL kongsi Umami anda untuk menyemat papan pemuka di sini.",
     "openInUmami": "Buka papan pemuka dalam tab baharu",
     "embedHint": "Jika papan pemuka di atas tidak muat, instance Umami anda mungkin menyekat penyematan iframe. Set ALLOWED_FRAME_URLS kepada URL laman anda (cth. https://carisekolah.civictech.my) dalam projek Umami dan susun semula."
