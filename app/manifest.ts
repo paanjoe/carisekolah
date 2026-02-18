@@ -2,8 +2,8 @@ import type { MetadataRoute } from "next";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "carisekolah.my",
-    short_name: "carisekolah.my",
+    name: "carisekolahmy",
+    short_name: "carisekolahmy",
     description: "Cari dan analisis sekolah KPM mengikut lokasi dan statistik.",
     start_url: "/ms",
     display: "standalone",

@@ -1,6 +1,6 @@
 {
   "common": {
-    "appName": "carisekolah.my",
+    "appName": "carisekolahmy",
     "home": "Home",
     "search": "Search",
     "directory": "Directory",
@@ -11,13 +11,15 @@
     "facilityUpgrades": "Facility Upgrades",
     "comingSoon": "Coming soon",
     "pageStatistics": "Page Statistics",
+    "dataCatalogue": "Data Catalogue",
     "code": "Code",
     "viewOnMap": "View on map",
     "viewSchoolDetails": "View school details",
     "all": "All",
     "reset": "Reset",
     "school": "School",
-    "schools": "schools"
+    "schools": "schools",
+    "skipToMainContent": "Skip to main content"
   },
   "footer": {
     "dataSourcePrefix": "Data source from: ",
@@ -27,7 +29,9 @@
     "legal": "Legal",
     "cc0License": "CC0: No Rights Reserved",
     "privacyPolicy": "Privacy Policy",
-    "termsOfUse": "Terms of Use"
+    "termsOfUse": "Terms of Use",
+    "broughtToYouByPrefix": "Brought to you by ",
+    "broughtToYouByOrg": "CivicTechMY (Civic Technology Community Malaysia)"
   },
   "cookies": {
     "title": "Cookies",
@@ -37,7 +41,7 @@
   },
   "legal": {
     "title": "Legal Notes",
-    "metaTitle": "Legal Notes | carisekolah.my",
+    "metaTitle": "Legal Notes | carisekolahmy",
     "metaDescription": "CC0 license and legal information.",
     "sourceCodeLink": "GitHub Source Code",
     "cc0Title": "CC0 1.0 Universal License",
@@ -47,8 +51,8 @@
   },
   "privacy": {
     "title": "Privacy Policy",
-    "metaTitle": "Privacy Policy | carisekolah.my",
-    "metaDescription": "carisekolah.my privacy policy.",
+    "metaTitle": "Privacy Policy | carisekolahmy",
+    "metaDescription": "carisekolahmy privacy policy.",
     "intro": "This privacy policy describes how we handle information when you use this website.",
     "dataUse": "Use of data",
     "dataUseText": "School data displayed is from public KPM sources. We do not collect your personal information unless you choose to store preferences (e.g. language or cookie consent) on your device.",
@@ -57,8 +61,8 @@
   },
   "terms": {
     "title": "Terms of Use",
-    "metaTitle": "Terms of Use | carisekolah.my",
-    "metaDescription": "carisekolah.my terms of use.",
+    "metaTitle": "Terms of Use | carisekolahmy",
+    "metaDescription": "carisekolahmy terms of use.",
     "intro": "By using this website, you agree to the following terms.",
     "useOfService": "Use of service",
     "useOfServiceText": "This site is provided for informational purposes only. School data is from public sources and may change. Use the information at your discretion.",
@@ -68,11 +72,11 @@
   "home": {
     "title": "Find Schools",
     "description": "Search KPM schools by name, location, state and PPD.",
-    "metaTitle": "Find Schools | carisekolah.my",
+    "metaTitle": "Find Schools | carisekolahmy",
     "metaDescription": "Search KPM schools by name, location, state and PPD.",
     "databaseCountPrefix": "Database contains ",
     "databaseCountSuffix": " schools.",
-    "welcomeTitle": "Welcome to carisekolah.my",
+    "welcomeTitle": "Welcome to carisekolahmy",
     "welcomeTitlePrefix": "Welcome to ",
     "welcomeSubtitle": "Open data, open source—community-driven. Find and compare KPM schools by location and stats.",
     "searchPlaceholder": "Search schools by name, code or address",
@@ -91,14 +95,14 @@
   },
   "directory": {
     "title": "School Directory",
-    "metaTitle": "School Directory | carisekolah.my",
+    "metaTitle": "School Directory | carisekolahmy",
     "metaDescription": "Search and list KPM schools.",
     "databaseCountPrefix": "Database contains ",
     "databaseCountSuffix": " schools."
   },
   "map": {
     "title": "School Map",
-    "metaTitle": "School Map | carisekolah.my",
+    "metaTitle": "School Map | carisekolahmy",
     "metaDescription": "KPM school location map. Find schools near you.",
     "hint": "Click markers for school info. Use \"Near me\" for schools within radius.",
     "searchPlaceholder": "Search school by name, code or address",
@@ -118,7 +122,7 @@
   },
   "compare": {
     "title": "Compare",
-    "metaTitle": "Compare Schools | carisekolah.my",
+    "metaTitle": "Compare Schools | carisekolahmy",
     "metaDescription": "Compare schools and get personalised recommendations based on your location and your child’s profile.",
     "comingSoonHeading": "Coming soon",
     "intro": "This page will let parents compare schools and get recommendations tailored to their child’s situation—for example, language ability and location.",
@@ -127,7 +131,7 @@
   },
   "facility": {
     "title": "Facility Upgrades",
-    "metaTitle": "Schools Needing Facility Upgrades | carisekolah.my",
+    "metaTitle": "Schools Needing Facility Upgrades | carisekolahmy",
     "metaDescription": "Statistics on schools that require upgrades due to poor facilities. We call on KPM to release open data for real analytics.",
     "comingSoonHeading": "Coming soon",
     "intro": "KPM publishes statistics on schools that need facility upgrades (e.g. poor infrastructure) at projekdaif.moe.gov.my. That dashboard is built in Power BI and the underlying data is not publicly available as open data.",
@@ -138,15 +142,15 @@
   },
   "pageStats": {
     "title": "Page Statistics",
-    "metaTitle": "Page Statistics | carisekolah.my",
-    "metaDescription": "Traffic and usage statistics for carisekolah.my (Umami).",
+    "metaTitle": "Page Statistics | carisekolahmy",
+    "metaDescription": "Traffic and usage statistics for carisekolahmy (Umami).",
     "intro": "Traffic and usage for this site are tracked with Umami (self-hosted, privacy-friendly). The dashboard below is embedded from our Umami instance.",
     "embedNotConfigured": "Page statistics dashboard is not configured yet. Set NEXT_PUBLIC_UMAMI_SHARE_URL to your Umami share URL to embed the dashboard here.",
     "openInUmami": "Open in Umami"
   },
   "statistics": {
     "title": "School Statistics",
-    "metaTitle": "School Statistics | carisekolah.my",
+    "metaTitle": "School Statistics | carisekolahmy",
     "metaDescription": "KPM school statistics, overall school health, and areas for ministry improvement.",
     "intro": "Holistic view of KPM school health, national KPIs, and data-driven areas to improve. This open data helps the ministry see where to act.",
     "disclaimerTitle": "Data disclaimer",
@@ -295,9 +299,22 @@
     "teacherShortfall": "Shortfall: {count} more teachers needed to meet 30-pupil guideline",
     "meetsGuideline": "Current staff can support classes of ≤30 in theory"
   },
+  "dataCatalogue": {
+    "metaTitle": "Data Catalogue | carisekolahmy",
+    "metaDescription": "Download KPM school data as JSON for carisekolahmy.",
+    "title": "Data Catalogue",
+    "intro": "Download the school dataset used by this site. The data is sourced from KPM and updated regularly.",
+    "downloadSchools": "Download schools.json",
+    "downloadHint": "Full list of schools in JSON format. File may be large.",
+    "fieldsNote": "Fields include school code, name, state, PPD, address, enrolment, teachers, coordinates, and more.",
+    "sampleModelTitle": "Sample record (schools.json)",
+    "sampleModelDescription": "Each item in the array is a school object. Example structure:",
+    "copyJson": "Copy JSON",
+    "copied": "Copied!"
+  },
   "manifest": {
-    "name": "carisekolah.my",
-    "shortName": "carisekolah.my",
+    "name": "carisekolahmy",
+    "shortName": "carisekolahmy",
     "description": "Search and analyse KPM schools by location and statistics."
   }
 }

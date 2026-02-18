@@ -28,3 +28,6 @@ next-env.d.ts
 # IDE
 .idea
 .vscode
+
+test-results/
+playwright-report/

@@ -1,6 +1,6 @@
 {
   "common": {
-    "appName": "carisekolah.my",
+    "appName": "carisekolahmy",
     "home": "Utama",
     "search": "Cari",
     "directory": "Direktori",
@@ -11,13 +11,15 @@
     "facilityUpgrades": "Naik Taraf Kemudahan",
     "comingSoon": "Akan datang",
     "pageStatistics": "Statistik Halaman",
+    "dataCatalogue": "Katalog Data",
     "code": "Kod",
     "viewOnMap": "Lihat di peta",
     "viewSchoolDetails": "Lihat butiran sekolah",
     "all": "Semua",
     "reset": "Set semula",
     "school": "Sekolah",
-    "schools": "sekolah"
+    "schools": "sekolah",
+    "skipToMainContent": "Langkau ke kandungan utama"
   },
   "footer": {
     "dataSourcePrefix": "Sumber data dari: ",
@@ -27,7 +29,9 @@
     "legal": "Perundangan",
     "cc0License": "CC0: Tiada Hak Terpelihara",
     "privacyPolicy": "Dasar Privasi",
-    "termsOfUse": "Syarat Penggunaan"
+    "termsOfUse": "Syarat Penggunaan",
+    "broughtToYouByPrefix": "Dibawakan kepada anda oleh ",
+    "broughtToYouByOrg": "CivicTechMY (Civic Technology Community Malaysia)"
   },
   "cookies": {
     "title": "Cookies",
@@ -37,7 +41,7 @@
   },
   "legal": {
     "title": "Nota Undang-undang",
-    "metaTitle": "Nota Undang-undang | carisekolah.my",
+    "metaTitle": "Nota Undang-undang | carisekolahmy",
     "metaDescription": "Lesen CC0 dan maklumat undang-undang.",
     "sourceCodeLink": "Kod Sumber GitHub",
     "cc0Title": "Lesen CC0 1.0 Universal",
@@ -47,8 +51,8 @@
   },
   "privacy": {
     "title": "Dasar Privasi",
-    "metaTitle": "Dasar Privasi | carisekolah.my",
-    "metaDescription": "Dasar privasi carisekolah.my.",
+    "metaTitle": "Dasar Privasi | carisekolahmy",
+    "metaDescription": "Dasar privasi carisekolahmy.",
     "intro": "Dasar privasi ini menerangkan bagaimana kami mengendalikan maklumat apabila anda menggunakan laman web ini.",
     "dataUse": "Penggunaan data",
     "dataUseText": "Data sekolah yang dipaparkan berasal daripada sumber awam KPM. Kami tidak mengumpul maklumat peribadi anda melainkan anda memilih untuk menyimpan pilihan (contoh: pilihan bahasa atau persetujuan cookies) dalam peranti anda.",
@@ -57,8 +61,8 @@
   },
   "terms": {
     "title": "Syarat Penggunaan",
-    "metaTitle": "Syarat Penggunaan | carisekolah.my",
-    "metaDescription": "Syarat penggunaan carisekolah.my.",
+    "metaTitle": "Syarat Penggunaan | carisekolahmy",
+    "metaDescription": "Syarat penggunaan carisekolahmy.",
     "intro": "Dengan menggunakan laman web ini, anda bersetuju dengan syarat berikut.",
     "useOfService": "Penggunaan perkhidmatan",
     "useOfServiceText": "Laman ini disediakan untuk tujuan maklumat sahaja. Data sekolah adalah daripada sumber awam dan mungkin berubah. Gunakan maklumat mengikut budi bicara anda.",
@@ -68,11 +72,11 @@
   "home": {
     "title": "Cari Sekolah",
     "description": "Cari sekolah KPM mengikut nama, lokasi, negeri dan PPD.",
-    "metaTitle": "Cari Sekolah | carisekolah.my",
+    "metaTitle": "Cari Sekolah | carisekolahmy",
     "metaDescription": "Cari sekolah KPM mengikut nama, lokasi, negeri dan PPD.",
     "databaseCountPrefix": "Pangkalan data mengandungi ",
     "databaseCountSuffix": " sekolah.",
-    "welcomeTitle": "Selamat datang ke carisekolah.my",
+    "welcomeTitle": "Selamat datang ke carisekolahmy",
     "welcomeTitlePrefix": "Selamat datang ke ",
     "welcomeSubtitle": "Data terbuka, sumber terbuka—didorong komuniti. Cari dan banding sekolah KPM mengikut lokasi dan statistik.",
     "searchPlaceholder": "Cari sekolah mengikut nama, kod atau alamat",
@@ -91,14 +95,14 @@
   },
   "directory": {
     "title": "Direktori Sekolah",
-    "metaTitle": "Direktori Sekolah | carisekolah.my",
+    "metaTitle": "Direktori Sekolah | carisekolahmy",
     "metaDescription": "Cari dan senarai sekolah KPM.",
     "databaseCountPrefix": "Pangkalan data mengandungi ",
     "databaseCountSuffix": " sekolah."
   },
   "map": {
     "title": "Peta Sekolah",
-    "metaTitle": "Peta Sekolah | carisekolah.my",
+    "metaTitle": "Peta Sekolah | carisekolahmy",
     "metaDescription": "Peta lokasi sekolah KPM. Cari sekolah berhampiran anda.",
     "hint": "Klik penanda untuk maklumat sekolah. Gunakan \"Dekat saya\" untuk sekolah dalam radius.",
     "searchPlaceholder": "Cari sekolah mengikut nama, kod atau alamat",
@@ -118,7 +122,7 @@
   },
   "compare": {
     "title": "Banding",
-    "metaTitle": "Banding Sekolah | carisekolah.my",
+    "metaTitle": "Banding Sekolah | carisekolahmy",
     "metaDescription": "Banding sekolah dan dapatkan cadangan peribadi berdasarkan lokasi dan profil anak anda.",
     "comingSoonHeading": "Akan datang",
     "intro": "Halaman ini akan membolehkan ibu bapa membandingkan sekolah dan mendapat cadangan yang disesuaikan dengan situasi anak—contohnya kebolehan bahasa dan lokasi.",
@@ -127,7 +131,7 @@
   },
   "facility": {
     "title": "Naik Taraf Kemudahan",
-    "metaTitle": "Sekolah Perlu Naik Taraf Kemudahan | carisekolah.my",
+    "metaTitle": "Sekolah Perlu Naik Taraf Kemudahan | carisekolahmy",
     "metaDescription": "Statistik sekolah yang memerlukan naik taraf akibat kemudahan lemah. Kami menggesa KPM membuka data untuk analitik sebenar.",
     "comingSoonHeading": "Akan datang",
     "intro": "KPM menerbitkan statistik sekolah yang memerlukan naik taraf kemudahan (contoh infrastruktur lemah) di projekdaif.moe.gov.my. Papan pemuka itu dibina dalam Power BI dan data asas tidak tersedia secara terbuka.",
@@ -138,15 +142,15 @@
   },
   "pageStats": {
     "title": "Statistik Halaman",
-    "metaTitle": "Statistik Halaman | carisekolah.my",
-    "metaDescription": "Statistik trafik dan penggunaan untuk carisekolah.my (Umami).",
+    "metaTitle": "Statistik Halaman | carisekolahmy",
+    "metaDescription": "Statistik trafik dan penggunaan untuk carisekolahmy (Umami).",
     "intro": "Trafik dan penggunaan laman ini dikesan dengan Umami (self-hosted, mesra privasi). Papan pemuka di bawah disemat dari instans Umami kami.",
     "embedNotConfigured": "Papan pemuka statistik halaman belum dikonfigurasi. Set NEXT_PUBLIC_UMAMI_SHARE_URL kepada URL kongsi Umami anda untuk menyemat papan pemuka di sini.",
     "openInUmami": "Buka dalam Umami"
   },
   "statistics": {
     "title": "Statistik Sekolah",
-    "metaTitle": "Statistik Sekolah | carisekolah.my",
+    "metaTitle": "Statistik Sekolah | carisekolahmy",
     "metaDescription": "Statistik sekolah KPM, kesihatan sekolah keseluruhan, dan bidang untuk penambahbaikan KPM.",
     "intro": "Pandangan holistik kesihatan sekolah KPM, KPI kebangsaan, dan bidang penambahbaikan berasaskan data. Data terbuka ini membantu KPM melihat di mana perlu bertindak.",
     "disclaimerTitle": "Penafian data",
@@ -295,9 +299,22 @@
     "teacherShortfall": "Kekurangan: {count} guru lagi diperlukan untuk memenuhi garis panduan 30 murid",
     "meetsGuideline": "Kakitangan semasa boleh menyokong kelas ≤30 secara teori"
   },
+  "dataCatalogue": {
+    "metaTitle": "Katalog Data | carisekolahmy",
+    "metaDescription": "Muat turun data sekolah KPM dalam format JSON untuk carisekolahmy.",
+    "title": "Katalog Data",
+    "intro": "Muat turun set data sekolah yang digunakan oleh laman ini. Data bersumber dari KPM dan dikemas kini secara berkala.",
+    "downloadSchools": "Muat turun schools.json",
+    "downloadHint": "Senarai penuh sekolah dalam format JSON. Fail mungkin besar.",
+    "fieldsNote": "Medan termasuk kod sekolah, nama, negeri, PPD, alamat, enrolmen, guru, koordinat, dan lain-lain.",
+    "sampleModelTitle": "Contoh rekod (schools.json)",
+    "sampleModelDescription": "Setiap item dalam tatasusunan ialah objek sekolah. Contoh struktur:",
+    "copyJson": "Salin JSON",
+    "copied": "Disalin!"
+  },
   "manifest": {
-    "name": "carisekolah.my",
-    "shortName": "carisekolah.my",
+    "name": "carisekolahmy",
+    "shortName": "carisekolahmy",
     "description": "Cari dan analisis sekolah KPM mengikut lokasi dan statistik."
   }
 }
