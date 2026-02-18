@@ -73,6 +73,7 @@
     "databaseCountPrefix": "Pangkalan data mengandungi ",
     "databaseCountSuffix": " sekolah.",
     "welcomeTitle": "Selamat datang ke carisekolah.my",
+    "welcomeTitlePrefix": "Selamat datang ke ",
     "welcomeSubtitle": "Data terbuka, sumber terbuka—didorong komuniti. Cari dan banding sekolah KPM mengikut lokasi dan statistik.",
     "searchPlaceholder": "Cari sekolah mengikut nama, kod atau alamat",
     "searchHint": "Tekan / untuk cari",

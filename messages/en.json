@@ -73,6 +73,7 @@
     "databaseCountPrefix": "Database contains ",
     "databaseCountSuffix": " schools.",
     "welcomeTitle": "Welcome to carisekolah.my",
+    "welcomeTitlePrefix": "Welcome to ",
     "welcomeSubtitle": "Open data, open source—community-driven. Find and compare KPM schools by location and stats.",
     "searchPlaceholder": "Search schools by name, code or address",
     "searchHint": "Press / to search",

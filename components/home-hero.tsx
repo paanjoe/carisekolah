@@ -193,11 +193,12 @@ export function HomeHero() {
 
   return (
     <section className="relative bg-[hsl(var(--hero-accent))] border-b border-border">
-      <div className="container mx-auto px-4 py-12 md:py-16">
+      <div className="container mx-auto px-4 pt-6 pb-12 md:pt-8 md:pb-16">
         <div className="grid md:grid-cols-[1fr,minmax(400px,680px)] gap-10 items-center">
           <div className="space-y-6">
-            <h1 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl md:text-5xl flex items-center gap-2 flex-wrap">
-              {t("welcomeTitle")}
+            <h1 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl md:text-5xl flex items-center gap-2 whitespace-nowrap flex-nowrap">
+              {t("welcomeTitlePrefix")}
+              <span className="text-primary">{tCommon("appName")}</span>
               <span aria-hidden>🇲🇾</span>
             </h1>
             <p className="text-lg text-muted-foreground max-w-xl">

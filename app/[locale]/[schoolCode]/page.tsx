@@ -11,15 +11,9 @@ import { MapPin, Phone, Mail, Building2, Users, GraduationCap, BarChart3, Trendi
 
 type Props = { params: Promise<{ locale: string; schoolCode: string }> };
 
+// Return [] so school pages are rendered on-demand (keeps Vercel deploy under 75 MB)
 export async function generateStaticParams() {
-  const schools = getAllSchools();
-  const params: { locale: string; schoolCode: string }[] = [];
-  for (const locale of routing.locales) {
-    for (const s of schools) {
-      params.push({ locale, schoolCode: s.kodSekolah });
-    }
-  }
-  return params;
+  return [];
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {

@@ -33,7 +33,7 @@ export default async function LocaleLayout({ children, params }: Props) {
         <div className="container mx-auto px-4">
           <div className="flex h-14 items-center justify-between gap-6">
             <Link href="/" className="shrink-0 flex items-center">
-              <span className="font-bold text-lg text-black dark:text-foreground uppercase">{t("appName")}</span>
+              <span className="font-bold text-lg text-primary uppercase">{t("appName")}</span>
               <span className="ml-1.5" aria-hidden>🇲🇾</span>
             </Link>
             <nav className="hidden sm:flex items-center gap-1">
@@ -91,7 +91,7 @@ export default async function LocaleLayout({ children, params }: Props) {
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 gap-8 text-sm md:grid-cols-3 md:gap-4">
             <div>
-              <p className="text-2xl font-bold text-black dark:text-foreground uppercase flex items-center gap-1.5">
+              <p className="text-2xl font-bold text-primary uppercase flex items-center gap-1.5">
                 {t("appName")}
                 <span aria-hidden>🇲🇾</span>
               </p>

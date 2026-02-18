@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import { getSchoolByKod, getAllSchools } from "@/lib/schools";
+import { getSchoolByKod } from "@/lib/schools";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Link } from "@/i18n/navigation";
@@ -10,15 +10,9 @@ import { routing } from "@/i18n/routing";
 
 type Props = { params: Promise<{ locale: string; kod: string }> };
 
+// Return [] so school pages are rendered on-demand (keeps Vercel deploy under 75 MB)
 export async function generateStaticParams() {
-  const schools = getAllSchools();
-  const params: { locale: string; kod: string }[] = [];
-  for (const locale of routing.locales) {
-    for (const s of schools) {
-      params.push({ locale, kod: s.kodSekolah });
-    }
-  }
-  return params;
+  return [];
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
