@@ -79,6 +79,12 @@ export default async function LocaleLayout({ children, params }: Props) {
               >
                 {t("pageStatistics")}
               </Link>
+              <Link
+                href="/data-catalogue"
+                className="px-3 py-2 rounded-md text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted/60 transition-colors"
+              >
+                {t("dataCatalogue")}
+              </Link>
             </nav>
             <div className="flex items-center gap-2">
               <LocaleDropdown />
