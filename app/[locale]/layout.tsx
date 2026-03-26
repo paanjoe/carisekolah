@@ -4,9 +4,8 @@ import { hasLocale } from "next-intl";
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
 import { Link } from "@/i18n/navigation";
-import { LocaleDropdown } from "@/components/locale-dropdown";
-import { MobileNav } from "@/components/mobile-nav";
 import { CookieConsent } from "@/components/cookie-consent";
+import { SidebarLayout } from "@/components/sidebar-layout";
 
 type Props = {
   children: React.ReactNode;
@@ -28,6 +27,57 @@ export default async function LocaleLayout({ children, params }: Props) {
   const t = await getTranslations("common");
   const tFooter = await getTranslations("footer");
 
+  const navItems = [
+    { href: "/",                label: t("home") },
+    { href: "/directory",       label: t("directory") },
+    { href: "/peta",            label: t("map") },
+    { href: "/statistik",       label: t("schoolStatistics") },
+    { href: "/compare",         label: t("compare") },
+    { href: "/facility",        label: t("facilityUpgrades") },
+    { href: "/page-statistics", label: t("pageStatistics") },
+    { href: "/data-catalogue",  label: t("dataCatalogue") },
+  ];
+
+  const footer = (
+    <footer className="border-t border-border bg-sidebar py-4 px-6 shrink-0">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 text-[10px] text-muted-foreground font-sans">
+        <p>
+          {tFooter("broughtToYouByPrefix")}
+          <a
+            href="https://civictech.my"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-primary underline underline-offset-2 hover:opacity-80 ml-0.5"
+          >
+            {tFooter("broughtToYouByOrg")}
+          </a>
+          {" · "}
+          <a
+            href="https://emisonline.moe.gov.my/risalahmap/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-primary underline underline-offset-2 hover:opacity-80"
+          >
+            {tFooter("dataSourceLink")}
+          </a>
+        </p>
+        <div className="flex items-center gap-3">
+          <Link href="/legal"   className="hover:text-foreground transition-colors">{tFooter("cc0License")}</Link>
+          <Link href="/privacy" className="hover:text-foreground transition-colors">{tFooter("privacyPolicy")}</Link>
+          <Link href="/terms"   className="hover:text-foreground transition-colors">{tFooter("termsOfUse")}</Link>
+          <a
+            href="https://github.com/paanjoe/carisekolah"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-foreground transition-colors"
+          >
+            GitHub
+          </a>
+        </div>
+      </div>
+    </footer>
+  );
+
   return (
     <NextIntlClientProvider messages={messages}>
       <a
@@ -36,145 +86,13 @@ export default async function LocaleLayout({ children, params }: Props) {
       >
         {t("skipToMainContent")}
       </a>
-      <header className="sticky top-0 z-50 border-b border-border bg-card/95 backdrop-blur supports-[backdrop-filter]:bg-card/80">
-        <div className="container mx-auto px-4">
-          <div className="flex h-14 items-center justify-between gap-6">
-            <Link href="/" className="shrink-0 flex items-center">
-              <span className="font-bold text-lg text-primary uppercase">{t("appName")}</span>
-              <span className="ml-1.5" aria-hidden>🇲🇾</span>
-            </Link>
-            <nav className="hidden sm:flex items-center gap-1">
-              <Link
-                href="/"
-                className="px-3 py-2 rounded-md text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted/60 transition-colors"
-              >
-                {t("home")}
-              </Link>
-              <Link
-                href="/directory"
-                className="px-3 py-2 rounded-md text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted/60 transition-colors"
-              >
-                {t("directory")}
-              </Link>
-              <Link
-                href="/peta"
-                className="px-3 py-2 rounded-md text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted/60 transition-colors"
-              >
-                {t("map")}
-              </Link>
-              <Link
-                href="/statistik"
-                className="px-3 py-2 rounded-md text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted/60 transition-colors"
-              >
-                {t("schoolStatistics")}
-              </Link>
-              <Link
-                href="/compare"
-                className="px-3 py-2 rounded-md text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted/60 transition-colors"
-              >
-                {t("compare")}
-              </Link>
-              <Link
-                href="/facility"
-                className="px-3 py-2 rounded-md text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted/60 transition-colors"
-              >
-                {t("facilityUpgrades")}
-              </Link>
-              <Link
-                href="/page-statistics"
-                className="px-3 py-2 rounded-md text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted/60 transition-colors"
-              >
-                {t("pageStatistics")}
-              </Link>
-              <Link
-                href="/data-catalogue"
-                className="px-3 py-2 rounded-md text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted/60 transition-colors"
-              >
-                {t("dataCatalogue")}
-              </Link>
-            </nav>
-            <div className="flex items-center gap-2">
-              <MobileNav
-                links={[
-                  { href: "/", label: t("home") },
-                  { href: "/directory", label: t("directory") },
-                  { href: "/peta", label: t("map") },
-                  { href: "/statistik", label: t("schoolStatistics") },
-                  { href: "/compare", label: t("compare") },
-                  { href: "/facility", label: t("facilityUpgrades") },
-                  { href: "/page-statistics", label: t("pageStatistics") },
-                  { href: "/data-catalogue", label: t("dataCatalogue") },
-                ]}
-              >
-                <LocaleDropdown />
-              </MobileNav>
-              <LocaleDropdown />
-            </div>
-          </div>
-        </div>
-      </header>
-      <main id="main-content" className="flex-1">{children}</main>
-      <footer className="border-t border-border bg-muted/30 py-12">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 gap-8 text-sm md:grid-cols-3 md:gap-4">
-            <div>
-              <p className="text-2xl font-bold text-primary uppercase flex items-center gap-1.5">
-                {t("appName")}
-                <span aria-hidden>🇲🇾</span>
-              </p>
-              <p className="mt-1 text-muted-foreground">
-                {tFooter("dataSourcePrefix")}
-                <a
-                  href="https://emisonline.moe.gov.my/risalahmap/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="underline hover:text-foreground"
-                >
-                  {tFooter("dataSourceLink")}
-                </a>
-              </p>
-            </div>
-            <div>
-              <p className="font-bold text-foreground">{tFooter("openSource")}</p>
-              <p className="mt-1 text-muted-foreground">
-                <a
-                  href="https://github.com/paanjoe/carisekolah"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="underline hover:text-foreground"
-                >
-                  {tFooter("githubRepo")}
-                </a>
-              </p>
-            </div>
-            <div>
-              <p className="font-bold text-foreground">{tFooter("legal")}</p>
-              <p className="mt-1 flex flex-wrap gap-x-3 gap-y-1 text-muted-foreground">
-                <Link href="/legal" className="underline hover:text-foreground">
-                  {tFooter("cc0License")}
-                </Link>
-                <Link href="/privacy" className="underline hover:text-foreground">
-                  {tFooter("privacyPolicy")}
-                </Link>
-                <Link href="/terms" className="underline hover:text-foreground">
-                  {tFooter("termsOfUse")}
-                </Link>
-              </p>
-            </div>
-          </div>
-          <p className="mt-8 pt-6 border-t border-border text-center text-sm text-muted-foreground">
-            {tFooter("broughtToYouByPrefix")}
-            <a
-              href="https://civictech.my"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="underline hover:text-foreground"
-            >
-              {tFooter("broughtToYouByOrg")}
-            </a>
-          </p>
-        </div>
-      </footer>
+
+      <SidebarLayout appName={t("appName")} navItems={navItems} footer={footer}>
+        <main id="main-content" className="flex-1">
+          {children}
+        </main>
+      </SidebarLayout>
+
       <CookieConsent />
     </NextIntlClientProvider>
   );

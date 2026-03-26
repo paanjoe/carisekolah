@@ -4,43 +4,53 @@
 
 @layer base {
   :root {
-    /* Gold & white theme – gold as primary (darker gold) */
-    --background: 0 0% 100%;
-    --foreground: 30 15% 14%;
-    --card: 0 0% 100%;
-    --card-foreground: 30 15% 14%;
-    --primary: 43 78% 42%;
+    /* ── Light mode ── */
+    --background: 210 15% 97%;        /* near-white blue-gray page bg */
+    --sidebar: 0 0% 100%;             /* white sidebar */
+    --card: 0 0% 100%;                /* white panels */
+    --card-foreground: 215 30% 12%;
+    --foreground: 215 30% 12%;        /* dark navy text */
+    --popover: 0 0% 100%;
+    --popover-foreground: 215 30% 12%;
+    --muted: 210 14% 93%;
+    --muted-foreground: 210 12% 47%;
+    --primary: 152 61% 26%;           /* forest green #1a6b45 */
     --primary-foreground: 0 0% 100%;
-    --secondary: 45 25% 96%;
-    --secondary-foreground: 30 15% 20%;
-    --muted: 45 20% 96%;
-    --muted-foreground: 30 12% 38%;
-    --accent: 45 35% 94%;
-    --accent-foreground: 30 15% 20%;
+    --secondary: 210 14% 93%;
+    --secondary-foreground: 215 30% 12%;
+    --accent: 38 92% 50%;             /* amber */
+    --accent-foreground: 0 0% 10%;
     --destructive: 0 84.2% 60.2%;
-    --border: 45 15% 90%;
-    --input: 45 15% 92%;
-    --ring: 43 78% 42%;
-    --radius: 0.5rem;
-    --hero-accent: 45 50% 97%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 210 18% 89%;
+    --input: 210 14% 91%;
+    --ring: 152 61% 26%;
+    --radius: 0.375rem;
+    --hero-accent: 43 30% 95%;
   }
+
   .dark {
-    --background: 30 15% 8%;
-    --foreground: 45 20% 95%;
-    --card: 30 15% 10%;
-    --card-foreground: 45 20% 95%;
-    --primary: 43 78% 42%;
+    /* ── Dark mode — dashboard aesthetic ── */
+    --background: 213 35% 8%;         /* #0d1520 very dark navy */
+    --sidebar: 213 42% 11%;           /* #101b28 sidebar (slightly lighter) */
+    --card: 213 38% 13%;              /* #162032 panel background */
+    --card-foreground: 210 25% 85%;
+    --foreground: 210 25% 85%;        /* light text */
+    --popover: 213 38% 13%;
+    --popover-foreground: 210 25% 85%;
+    --muted: 213 32% 17%;             /* #1a2a3a muted bg */
+    --muted-foreground: 210 15% 52%;  /* #7a8fa0 dim text */
+    --primary: 152 66% 46%;           /* #22c97a bright green on dark */
     --primary-foreground: 0 0% 100%;
-    --secondary: 30 20% 18%;
-    --secondary-foreground: 45 20% 95%;
-    --muted: 30 18% 18%;
-    --muted-foreground: 45 15% 65%;
-    --accent: 43 40% 25%;
-    --accent-foreground: 45 20% 95%;
-    --destructive: 0 62.8% 30.6%;
-    --border: 30 20% 22%;
-    --input: 30 20% 22%;
-    --ring: 43 78% 42%;
+    --secondary: 213 32% 17%;
+    --secondary-foreground: 210 25% 85%;
+    --accent: 38 90% 56%;             /* bright amber */
+    --accent-foreground: 215 30% 12%;
+    --destructive: 0 62.8% 50%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 213 35% 18%;            /* subtle panel borders */
+    --input: 213 32% 17%;
+    --ring: 152 66% 46%;
   }
 }
 
@@ -50,38 +60,51 @@
   }
   body {
     @apply bg-background text-foreground;
+    font-family: var(--font-dm-sans), system-ui, sans-serif;
   }
-  /* High-contrast focus outline for keyboard users (WCAG 2.4.7) */
   :focus-visible {
-    outline: 2px solid hsl(var(--foreground));
+    outline: 2px solid hsl(var(--primary));
     outline-offset: 2px;
   }
 }
 
-/* Statistics bar fill animation on load – scaleX so it works everywhere */
+/* ── Editorial / Display font utility ── */
+.font-display {
+  font-family: var(--font-playfair), Georgia, "Times New Roman", serif;
+}
+
+/* ── Sidebar background ── */
+.bg-sidebar {
+  background-color: hsl(var(--sidebar));
+}
+
+/* ── Panel header prefix symbols ── */
+.panel-symbol {
+  @apply text-primary text-xs leading-none;
+}
+
+/* ── Statistics bar animations ── */
 @keyframes stat-bar-grow {
-  from {
-    transform: scaleX(0);
-  }
-  to {
-    transform: scaleX(1);
-  }
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
 }
 
 .stat-bar-wrap {
   transform-origin: left;
-  animation: stat-bar-grow 0.7s ease-out forwards;
+  animation: stat-bar-grow 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 .stat-bar-wrap-delay-1 { animation-delay: 0.1s; }
 .stat-bar-wrap-delay-2 { animation-delay: 0.2s; }
 .stat-bar-wrap-delay-3 { animation-delay: 0.3s; }
 .stat-bar-wrap-delay-4 { animation-delay: 0.4s; }
+.stat-bar-wrap-delay-5 { animation-delay: 0.5s; }
+.stat-bar-wrap-delay-6 { animation-delay: 0.6s; }
+.stat-bar-wrap-delay-7 { animation-delay: 0.7s; }
+.stat-bar-wrap-delay-8 { animation-delay: 0.8s; }
 
-/* Circular gauge fill animation */
+/* ── Circular gauge ── */
 @keyframes stat-gauge-fill {
-  to {
-    stroke-dasharray: var(--gauge-dash, 0) 100;
-  }
+  to { stroke-dasharray: var(--gauge-dash, 0) 100; }
 }
 
 .stat-gauge-animate {
@@ -89,7 +112,7 @@
   animation: stat-gauge-fill 1s ease-out 0.3s forwards;
 }
 
-/* Leaflet popup: align and beautify close button */
+/* ── Leaflet map popup ── */
 .leaflet-popup-content-wrapper {
   padding-top: 2.25rem;
   padding-right: 2.25rem;
@@ -122,4 +145,3 @@
   background: hsl(var(--muted)) !important;
   color: hsl(var(--foreground)) !important;
 }
-
