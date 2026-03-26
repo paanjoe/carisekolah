@@ -1,18 +1,22 @@
 import type { Metadata } from "next";
 import Script from "next/script";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Playfair_Display, DM_Sans } from "next/font/google";
 import "./globals.css";
 
 const umamiScriptUrl = process.env.NEXT_PUBLIC_UMAMI_SCRIPT_URL;
 const umamiWebsiteId = process.env.NEXT_PUBLIC_UMAMI_WEBSITE_ID;
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const playfairDisplay = Playfair_Display({
+  variable: "--font-playfair",
   subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800", "900"],
+  style: ["normal", "italic"],
 });
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+
+const dmSans = DM_Sans({
+  variable: "--font-dm-sans",
   subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"],
 });
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://carisekolah.civictech.my";
@@ -47,9 +51,18 @@ export default function RootLayout({
   return (
     <html lang="ms" suppressHydrationWarning>
       <head>
+        {/* Anti-FOUC: apply saved theme before first paint */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){try{var t=localStorage.getItem('theme');if(t==='dark'||(t===null&&window.matchMedia('(prefers-color-scheme: dark)').matches)){document.documentElement.classList.add('dark')}}catch(e){}})()`,
+          }}
+        />
         <script defer src={`${umamiScriptUrl}`} data-website-id={umamiWebsiteId}></script>
       </head>
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen flex flex-col`} suppressHydrationWarning>
+      <body
+        className={`${playfairDisplay.variable} ${dmSans.variable} antialiased min-h-screen flex flex-col`}
+        suppressHydrationWarning
+      >
         {umamiScriptUrl && umamiWebsiteId && (
           <Script
             src={`${umamiScriptUrl.replace(/\/$/, "")}/script.js`}

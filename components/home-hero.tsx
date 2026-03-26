@@ -2,14 +2,69 @@
 
 import { useTranslations } from "next-intl";
 import { useRouter, Link } from "@/i18n/navigation";
-import { Search, MapPin, BarChart3, X } from "lucide-react";
+import { Search, X, BookOpen, Map, BarChart2, Scale } from "lucide-react";
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
 
+// ─── Types ────────────────────────────────────────────────────────────────────
+
 type SchoolSuggestion = { kodSekolah: string; namaSekolah?: string; negeri?: string };
+
+// ─── Metric cards data ────────────────────────────────────────────────────────
+
+const METRICS = [
+  {
+    label:    "SEKOLAH AWAM",
+    value:    "10,146",
+    sublabel: "Government Schools",
+    color:    "text-primary",
+  },
+  {
+    label:    "JUMLAH ENROLMEN",
+    value:    "3.1M",
+    sublabel: "Total Enrolment",
+    color:    "text-amber-600 dark:text-amber-400",
+  },
+  {
+    label:    "NEGERI",
+    value:    "16",
+    sublabel: "States & Territories",
+    color:    "text-blue-600 dark:text-blue-400",
+  },
+  {
+    label:    "GURU BERDAFTAR",
+    value:    "173K",
+    sublabel: "Registered Teachers",
+    color:    "text-teal-600 dark:text-teal-400",
+  },
+];
+
+// ─── Panel header component ────────────────────────────────────────────────────
+
+function PanelHeader({
+  symbol = "●",
+  title,
+  badge,
+}: {
+  symbol?: string;
+  title: string;
+  badge?: React.ReactNode;
+}) {
+  return (
+    <div className="flex items-center justify-between px-4 py-2.5 border-b border-border">
+      <div className="flex items-center gap-2">
+        <span className="text-primary text-[11px] leading-none" aria-hidden>{symbol}</span>
+        <span className="text-[11px] font-bold uppercase tracking-[0.12em] text-foreground font-sans">
+          {title}
+        </span>
+      </div>
+      {badge}
+    </div>
+  );
+}
+
+// ─── Main component ────────────────────────────────────────────────────────────
 
 export function HomeHero() {
   const t = useTranslations("home");
@@ -23,11 +78,10 @@ export function HomeHero() {
   const [open, setOpen] = useState(false);
   const [highlightedIndex, setHighlightedIndex] = useState(-1);
 
+  // ── Autocomplete logic (preserved) ──────────────────────────────────────────
+
   const fetchSuggestions = useCallback(async (q: string) => {
-    if (!q.trim()) {
-      setSuggestions([]);
-      return;
-    }
+    if (!q.trim()) { setSuggestions([]); return; }
     setLoading(true);
     try {
       const res = await fetch(`/api/schools/suggest?q=${encodeURIComponent(q)}&limit=10`);
@@ -54,16 +108,9 @@ export function HomeHero() {
       if (e.key === "/") {
         const target = e.target as HTMLElement;
         const isInput = target.tagName === "INPUT" || target.tagName === "TEXTAREA" || target.isContentEditable;
-        if (!isInput) {
-          e.preventDefault();
-          inputRef.current?.focus();
-        }
+        if (!isInput) { e.preventDefault(); inputRef.current?.focus(); }
       }
-      if (e.key === "Escape") {
-        setOpen(false);
-        setHighlightedIndex(-1);
-        inputRef.current?.blur();
-      }
+      if (e.key === "Escape") { setOpen(false); setHighlightedIndex(-1); inputRef.current?.blur(); }
     }
     window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
@@ -79,15 +126,12 @@ export function HomeHero() {
 
   const goToDirectory = () => {
     const q = query.trim();
-    setOpen(false);
-    setSuggestions([]);
-    if (q) router.push(`/directory?q=${encodeURIComponent(q)}`);
-    else router.push("/directory");
+    setOpen(false); setSuggestions([]);
+    router.push(q ? `/directory?q=${encodeURIComponent(q)}` : "/directory");
   };
 
   const goToSchool = (kod: string) => {
-    setOpen(false);
-    setSuggestions([]);
+    setOpen(false); setSuggestions([]);
     router.push(`/${encodeURIComponent(kod)}`);
   };
 
@@ -125,11 +169,7 @@ export function HomeHero() {
     const el = measureRef.current;
     const update = () => {
       const rect = el.getBoundingClientRect();
-      setDropdownRect({
-        top: rect.bottom + 4,
-        left: rect.left,
-        width: rect.width,
-      });
+      setDropdownRect({ top: rect.bottom + 4, left: rect.left, width: rect.width });
     };
     update();
     window.addEventListener("scroll", update, true);
@@ -150,163 +190,155 @@ export function HomeHero() {
         id="hero-suggestions"
         role="listbox"
         aria-busy={loading}
-        className={cn(
-          "fixed z-[100] rounded-xl border border-border bg-card py-1 shadow-xl",
-          "max-h-[280px] overflow-auto"
-        )}
-        style={{
-          top: `${dropdownRect.top}px`,
-          left: `${dropdownRect.left}px`,
-          width: `${dropdownRect.width}px`,
-        }}
+        className="fixed z-[100] rounded border border-border bg-card py-1 shadow-2xl max-h-[280px] overflow-auto"
+        style={{ top: `${dropdownRect.top}px`, left: `${dropdownRect.left}px`, width: `${dropdownRect.width}px` }}
       >
         {loading && (
-          <li className="px-4 py-3 text-sm text-muted-foreground" aria-hidden>...</li>
+          <li className="px-4 py-3 text-xs text-muted-foreground font-mono" aria-hidden>
+            Mencari...
+          </li>
         )}
-        {!loading &&
-          suggestions.map((s, i) => (
-            <li
-              key={s.kodSekolah}
-              id={`hero-suggestion-${i}`}
-              role="option"
-              aria-selected={i === highlightedIndex}
-              className={cn(
-                "cursor-pointer px-4 py-3 text-sm transition-colors",
-                i === highlightedIndex ? "bg-primary/10 text-foreground" : "text-foreground hover:bg-muted/60"
-              )}
-              onMouseEnter={() => setHighlightedIndex(i)}
-              onMouseDown={(e) => {
-                e.preventDefault();
-                goToSchool(s.kodSekolah);
-              }}
-            >
-              <span className="font-medium">{s.namaSekolah || s.kodSekolah}</span>
-              {s.kodSekolah && (
-                <span className="text-muted-foreground ml-2">{s.kodSekolah}</span>
-              )}
-              {s.negeri && (
-                <span className="text-muted-foreground ml-2">· {s.negeri}</span>
-              )}
-            </li>
-          ))}
+        {!loading && suggestions.map((s, i) => (
+          <li
+            key={s.kodSekolah}
+            id={`hero-suggestion-${i}`}
+            role="option"
+            aria-selected={i === highlightedIndex}
+            className={cn(
+              "cursor-pointer px-4 py-2.5 text-sm transition-colors font-sans",
+              i === highlightedIndex
+                ? "bg-primary/15 text-foreground"
+                : "text-foreground hover:bg-muted/60"
+            )}
+            onMouseEnter={() => setHighlightedIndex(i)}
+            onMouseDown={(e) => { e.preventDefault(); goToSchool(s.kodSekolah); }}
+          >
+            <span className="font-medium text-[13px]">{s.namaSekolah || s.kodSekolah}</span>
+            <span className="text-muted-foreground font-mono text-[10px] ml-2">{s.kodSekolah}</span>
+            {s.negeri && <span className="text-muted-foreground text-xs ml-2">· {s.negeri}</span>}
+          </li>
+        ))}
       </ul>,
       document.body
     );
 
+  // ── Render ───────────────────────────────────────────────────────────────────
+
   return (
-    <section className="relative bg-[hsl(var(--hero-accent))] border-b border-border">
-      <div className="container mx-auto px-4 pt-6 pb-12 md:pt-8 md:pb-16">
-        <div className="grid md:grid-cols-[1fr,minmax(400px,680px)] gap-10 items-center">
-          <div className="space-y-6">
-            <h1 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl md:text-5xl flex items-center gap-2 whitespace-nowrap flex-nowrap">
-              {t("welcomeTitlePrefix")}
-              <span className="text-primary">{tCommon("appName")}</span>
-              <span aria-hidden>🇲🇾</span>
-            </h1>
-            <p className="text-lg text-muted-foreground max-w-xl">
-              {t("welcomeSubtitle")}
-            </p>
-            <div ref={containerRef} className="max-w-xl">
-              <div ref={measureRef} className="relative">
-                <form onSubmit={handleSubmit} className="flex gap-2">
-                  <div className="relative flex-1 flex items-center">
-                    <Input
-                      ref={inputRef}
-                      type="text"
-                      autoComplete="off"
-                      placeholder={t("searchPlaceholder")}
-                      value={query}
-                      onChange={(e) => {
-                        setQuery(e.target.value);
-                        setOpen(true);
-                      }}
-                      onFocus={() => query.length >= 2 && setOpen(true)}
-                      onKeyDown={handleKeyDown}
-                      className={cn(
-                        "h-12 rounded-xl border-border bg-background pl-4 text-base shadow-sm",
-                        query ? "pr-12" : "pr-4"
-                      )}
-                      aria-label={t("searchPlaceholder")}
-                      aria-expanded={open}
-                      aria-controls="hero-suggestions"
-                      aria-activedescendant={
-                        open && !loading && highlightedIndex >= 0 && suggestions[highlightedIndex]
-                          ? `hero-suggestion-${highlightedIndex}`
-                          : undefined
-                      }
-                      aria-autocomplete="list"
-                      role="combobox"
-                    />
-                    {query && (
-                      <button
-                        type="button"
-                        onClick={() => {
-                          setQuery("");
-                          setOpen(false);
-                          setSuggestions([]);
-                          inputRef.current?.focus();
-                        }}
-                        className="absolute right-3 top-1/2 -translate-y-1/2 p-1 rounded-md text-muted-foreground hover:text-foreground hover:bg-muted/80 transition-colors"
-                        aria-label={tCommon("reset")}
-                      >
-                        <X className="h-4 w-4" />
-                      </button>
-                    )}
-                  </div>
-                  <Button type="submit" size="lg" className="h-12 rounded-xl px-6 shrink-0" aria-label={tCommon("search")}>
-                    <Search className="h-5 w-5" aria-hidden />
-                  </Button>
-                </form>
-              </div>
-              {dropdownContent}
-            </div>
-            <div>
-              <p className="text-sm font-medium text-muted-foreground mb-2">{t("popularLinks")}</p>
-              <div className="flex flex-wrap gap-2">
-                <Link
-                  href="/directory"
-                  className="inline-flex items-center gap-2 rounded-full border border-border bg-background px-4 py-2 text-sm font-medium text-foreground shadow-sm hover:bg-muted/60 transition-colors"
-                >
-                  <Search className="h-4 w-4" />
-                  {tCommon("directory")}
-                </Link>
-                <Link
-                  href="/peta"
-                  className="inline-flex items-center gap-2 rounded-full border border-border bg-background px-4 py-2 text-sm font-medium text-foreground shadow-sm hover:bg-muted/60 transition-colors"
-                >
-                  <MapPin className="h-4 w-4" />
-                  {tCommon("map")}
-                </Link>
-                <Link
-                  href="/statistik"
-                  className="inline-flex items-center gap-2 rounded-full border border-border bg-background px-4 py-2 text-sm font-medium text-foreground shadow-sm hover:bg-muted/60 transition-colors"
-                >
-                  <BarChart3 className="h-4 w-4" />
-                  {tCommon("statistics")}
-                </Link>
-              </div>
-            </div>
-          </div>
-          <div className="hidden md:flex justify-center items-center" aria-hidden>
-            <HeroIllustration />
-          </div>
+    <div className="p-4 md:p-6 space-y-4">
+
+      {/* Page header bar */}
+      <div className="flex items-center justify-between">
+        <div>
+          <h1 className="text-[11px] font-bold uppercase tracking-[0.2em] text-muted-foreground font-sans">
+            DASHBOARD
+          </h1>
+          <p className="mt-0.5 font-display font-bold text-xl text-foreground">
+            Direktori Sekolah Malaysia
+          </p>
+        </div>
+        <div className="hidden sm:flex items-center gap-1.5 text-[10px] font-mono text-muted-foreground">
+          <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 shrink-0" aria-hidden />
+          <span className="uppercase tracking-[0.1em]">10,146 sekolah diindeks</span>
         </div>
       </div>
-    </section>
-  );
-}
 
-function HeroIllustration() {
-  return (
-    <div
-      className="relative w-full max-w-[680px] aspect-square flex items-center justify-center"
-      aria-hidden
-    >
-      <img
-        src="/school-illustration.png"
-        alt=""
-        className="w-full h-full max-h-[680px] object-contain mix-blend-multiply dark:mix-blend-normal"
-      />
+      {/* ── Search panel ── */}
+      <div className="border border-border rounded bg-card overflow-hidden">
+        <PanelHeader symbol="●" title="CARI SEKOLAH" />
+        <div className="p-4" ref={containerRef}>
+          <div ref={measureRef}>
+            <form onSubmit={handleSubmit} className="flex gap-2">
+              <div className="relative flex-1 flex items-center">
+                <Search className="absolute left-3 h-3.5 w-3.5 text-muted-foreground pointer-events-none" aria-hidden />
+                <input
+                  ref={inputRef}
+                  type="text"
+                  autoComplete="off"
+                  placeholder={t("searchPlaceholder")}
+                  value={query}
+                  onChange={(e) => { setQuery(e.target.value); setOpen(true); }}
+                  onFocus={() => query.length >= 2 && setOpen(true)}
+                  onKeyDown={handleKeyDown}
+                  className={cn(
+                    "w-full h-10 rounded border border-border bg-background pl-9 pr-9 text-sm font-sans",
+                    "text-foreground placeholder:text-muted-foreground",
+                    "focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary transition-colors"
+                  )}
+                  aria-label={t("searchPlaceholder")}
+                  aria-expanded={open}
+                  aria-controls="hero-suggestions"
+                  aria-activedescendant={
+                    open && !loading && highlightedIndex >= 0 && suggestions[highlightedIndex]
+                      ? `hero-suggestion-${highlightedIndex}`
+                      : undefined
+                  }
+                  aria-autocomplete="list"
+                  role="combobox"
+                />
+                {query && (
+                  <button
+                    type="button"
+                    onClick={() => { setQuery(""); setOpen(false); setSuggestions([]); inputRef.current?.focus(); }}
+                    className="absolute right-3 top-1/2 -translate-y-1/2 p-0.5 rounded text-muted-foreground hover:text-foreground transition-colors"
+                    aria-label={tCommon("reset")}
+                  >
+                    <X className="h-3.5 w-3.5" />
+                  </button>
+                )}
+              </div>
+              <button
+                type="submit"
+                className="h-10 px-5 rounded bg-primary hover:bg-primary/90 text-primary-foreground text-xs font-bold uppercase tracking-[0.1em] font-sans transition-colors shrink-0"
+                aria-label={tCommon("search")}
+              >
+                {tCommon("search")}
+              </button>
+            </form>
+          </div>
+          {dropdownContent}
+          <p className="mt-2 text-[10px] text-muted-foreground font-sans">
+            Carian pantas: taip nama sekolah, kod sekolah, bandar, atau negeri ·{" "}
+            <kbd className="px-1 py-0.5 rounded border border-border bg-muted font-mono text-[9px]">/</kbd>{" "}
+            untuk fokus
+          </p>
+        </div>
+      </div>
+
+      {/* ── Metric cards ── */}
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
+        {METRICS.map((m) => (
+          <div key={m.label} className="border border-border rounded bg-card p-4">
+            <p className="text-[9px] font-bold uppercase tracking-[0.18em] text-muted-foreground font-sans mb-2">
+              {m.label}
+            </p>
+            <p className={cn("font-mono font-bold text-[1.75rem] leading-none", m.color)}>
+              {m.value}
+            </p>
+            <p className="mt-1.5 text-[10px] text-muted-foreground font-sans">{m.sublabel}</p>
+          </div>
+        ))}
+      </div>
+
+      {/* ── Quick navigation pills ── */}
+      <div className="flex flex-wrap gap-2">
+        {[
+          { href: "/directory", icon: BookOpen, label: "Direktori" },
+          { href: "/peta",      icon: Map,      label: "Peta" },
+          { href: "/statistik", icon: BarChart2, label: "Statistik" },
+          { href: "/compare",   icon: Scale,    label: "Bandingkan" },
+        ].map(({ href, icon: Icon, label }) => (
+          <Link
+            key={href}
+            href={href}
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded border border-border bg-card hover:border-primary/50 hover:bg-primary/5 text-[11px] font-sans font-medium text-muted-foreground hover:text-primary transition-colors"
+          >
+            <Icon className="h-3 w-3" aria-hidden />
+            {label}
+          </Link>
+        ))}
+      </div>
+
     </div>
   );
 }
